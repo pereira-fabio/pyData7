@@ -17,17 +17,21 @@ def main_request(baseurl,x):
     # checks if the response is 200
     return response.json()
 
+
 # gets the total results
 def get_total_results(response):
     return response['totalResults']
+
 
 # gets the results per page (default at 2000/page)
 def get_results_per_page(response):
     return response['resultsPerPage']
 
+
 # gets all the information for each vulnerability
 def get_vulnerabilities(response):
     return response['vulnerabilities']
+
 
 # gets the cve id for each vulnerability
 def get_cve_id(response):
@@ -36,9 +40,11 @@ def get_cve_id(response):
         charlist.append(get_vulnerabilities(response)[x]['cve']['id'])
     return charlist
 
+
 # how many vulnerabilities there are per page
 def get_length(response):
     return len(response['vulnerabilities'])
+
 
 # will check if metric has a 'cvssMetric' key.
 def get_cvssMetric(response,x):
@@ -51,6 +57,7 @@ def get_cvssMetric(response,x):
     # returns the cvss_metrics
     return cvss_metrics
 
+
 # gets the risk value
 def get_cvss(response,x):
     # checks if the get_cvssMetric is None or not
@@ -61,6 +68,7 @@ def get_cvss(response,x):
     else:
         # if there is no cvssMetric, it will return a '-'
         return '-'
+
 
 # gets the cve url for each vulnerability
 def get_cve_patched(response):
@@ -110,6 +118,7 @@ def get_cve_patched(response):
                 charlist.append(char_no_tag)
     # returns the list of dictionaries
     return charlist
+
 
 # an empty list to store all the results
 all_results = []

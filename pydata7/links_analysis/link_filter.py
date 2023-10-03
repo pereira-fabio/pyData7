@@ -29,7 +29,7 @@ def get_unique_cve_id(path_to_json):
 
 
 def data_filtering():
-
+    # Iterate through the regex patterns
     for regex in regex_data:
         # A list to store the complied regex
         list_regex = []
@@ -49,5 +49,6 @@ def data_filtering():
     with open("filtered_data.json", "w") as filtered_file:
         json.dump(filtered_data, filtered_file)
     return filtered_data
+
 
 data_filtering()
