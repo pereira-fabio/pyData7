@@ -45,9 +45,10 @@ def get_cvssMetric(response,x):
     cvss_metrics = None
     for key, value in get_vulnerabilities(response)[x]['cve']['metrics'].items():
         if key.startswith('cvssMetric'):
-            # data will be saved without needing to know the version of the CVSS
+            # data will be saved without needing to know the version of the CVSS (cvssMetricV2 or cvssMetricV3)
             cvss_metrics = value
             break
+    # returns the cvss_metrics
     return cvss_metrics
 
 # gets the risk value
@@ -58,13 +59,16 @@ def get_cvss(response,x):
         for y in range (0,len(get_cvssMetric(response,x))):
             return get_cvssMetric(response,x)[y]['impactScore']
     else:
+        # if there is no cvssMetric, it will return a '-'
         return '-'
 
 # gets the cve url for each vulnerability
 def get_cve_patched(response):
     # creating a list of dictionaries
     charlist = []
+    # for loop to go through all the vulnerabilities in the page
     for x in range(0, get_results_per_page(response)):
+        # for loop to go through all the references in the vulnerability
         for y in range(0, len(get_vulnerabilities(response)[x]['cve']['references'])):
             # checks if there is a tag
             if 'tags' in get_vulnerabilities(response)[x]['cve']['references'][y]:
@@ -104,20 +108,27 @@ def get_cve_patched(response):
                 }
                 # appends the dictionary to the list
                 charlist.append(char_no_tag)
+    # returns the list of dictionaries
     return charlist
 
-
+# an empty list to store all the results
 all_results = []
+
+# total results
 total_results = 0
+
+# results per page (default at 2000/page)
 resultsPerPage = 2000
-# first page
+
+# This will help to get the total results of the first page for the range
 data_0 = main_request(baseurl,0)
 response_code = requests.get(baseurl).status_code
+
+# checks if the response is 200
 if response_code != 200:
     logging.error('Could not get the data from the API', response_code)
     exit(1)
 else:
-    print(response_code)
     # whole database
     for start_index in range(0, get_total_results(data_0), resultsPerPage):
         data = main_request(baseurl,start_index)
@@ -131,6 +142,7 @@ else:
 #all_results.extend(get_cve_patched(data))
 #get_cvss(data,0)
 #print(all_results.extend(get_cvss(data,0)))
+
 
 # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
 current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
