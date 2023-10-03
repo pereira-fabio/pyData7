@@ -2,16 +2,18 @@ import requests
 import json
 import datetime
 import logging
+import os
 
 # API url
 baseurl = 'https://services.nvd.nist.gov/rest/json/cves/2.0'
-
+save_path = "../unfiltered_data/"
 # Configuring the logger
-logging.basicConfig(filename='data_generator.log', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
+logging.basicConfig(filename='data_generator.log', level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
 
 
 # main request to get all data (for the default 2000 first per page)
-def main_request(baseurl,x):
+def main_request(baseurl, x):
     # f'?startIndex={x}' will help to adavance into the next values
     response = requests.get(baseurl + f'?startIndex={x}')
     # checks if the response is 200
@@ -47,7 +49,7 @@ def get_length(response):
 
 
 # will check if metric has a 'cvssMetric' key.
-def get_cvssMetric(response,x):
+def get_cvssMetric(response, x):
     cvss_metrics = None
     for key, value in get_vulnerabilities(response)[x]['cve']['metrics'].items():
         if key.startswith('cvssMetric'):
@@ -59,12 +61,12 @@ def get_cvssMetric(response,x):
 
 
 # gets the risk value
-def get_cvss(response,x):
+def get_cvss(response, x):
     # checks if the get_cvssMetric is None or not
-    if get_cvssMetric(response,x) is not None:
+    if get_cvssMetric(response, x) is not None:
         # will return the impactScore of the saved values from get_cvssMetric
-        for y in range (0,len(get_cvssMetric(response,x))):
-            return get_cvssMetric(response,x)[y]['impactScore']
+        for y in range(0, len(get_cvssMetric(response, x))):
+            return get_cvssMetric(response, x)[y]['impactScore']
     else:
         # if there is no cvssMetric, it will return a '-'
         return '-'
@@ -87,7 +89,7 @@ def get_cve_patched(response):
                         'url': get_vulnerabilities(response)[x]['cve']['references'][y]['url'],
                         'published': get_vulnerabilities(response)[x]['cve']['published'],
                         'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
-                        'cvss': get_cvss(response,x),
+                        'cvss': get_cvss(response, x),
                         'patch': 'true'
                     }
                     # appends the dictionary to the list
@@ -99,7 +101,7 @@ def get_cve_patched(response):
                         'url': get_vulnerabilities(response)[x]['cve']['references'][y]['url'],
                         'published': get_vulnerabilities(response)[x]['cve']['published'],
                         'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
-                        'cvss': get_cvss(response,x),
+                        'cvss': get_cvss(response, x),
                         'patch': 'false'
                     }
                     # appends the dictionary to the list
@@ -111,7 +113,7 @@ def get_cve_patched(response):
                     'url': get_vulnerabilities(response)[x]['cve']['references'][y]['url'],
                     'published': get_vulnerabilities(response)[x]['cve']['published'],
                     'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
-                    'cvss': get_cvss(response,x),
+                    'cvss': get_cvss(response, x),
                     'patch': 'Nan'
                 }
                 # appends the dictionary to the list
@@ -130,7 +132,7 @@ total_results = 0
 resultsPerPage = 2000
 
 # This will help to get the total results of the first page for the range
-data_0 = main_request(baseurl,0)
+data_0 = main_request(baseurl, 0)
 response_code = requests.get(baseurl).status_code
 
 # checks if the response is 200
@@ -140,33 +142,30 @@ if response_code != 200:
 else:
     # whole database
     for start_index in range(0, get_total_results(data_0), resultsPerPage):
-        data = main_request(baseurl,start_index)
+        data = main_request(baseurl, start_index)
         all_results.extend(get_cve_patched(data))
         total_results = total_results + get_length(data)
         print(total_results, 'vulnerabilities were retrieved')
     logging.info('Data was successfully retrieved from the API')
 
-#single page test
-#data = main_request(baseurl,0)
-#all_results.extend(get_cve_patched(data))
-#get_cvss(data,0)
-#print(all_results.extend(get_cvss(data,0)))
+# single page test
+# data = main_request(baseurl,0)
+# all_results.extend(get_cve_patched(data))
+# get_cvss(data,0)
+# print(all_results.extend(get_cvss(data,0)))
 
 
 # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
 current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 # Saves the data into a json file with the current date and time
-file_path = f"data_{current_time}.json"
+file_name = f"data_{current_time}.json"
+
+# Creates the path to save the json file
+file_path = os.path.join(save_path, file_name)
 
 # Writes the data into a json file
 with open(file_path, "w") as json_file:
     json.dump(all_results, json_file)
 
 logging.info('Data was successfully saved into a json file')
-
-
-
-
-
-

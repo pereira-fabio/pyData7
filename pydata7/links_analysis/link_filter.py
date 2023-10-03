@@ -1,10 +1,15 @@
 import json
 import re
+import os
 
+# Path to the filtered data
+save_path = "../filtered_data/"
+
+# Path to the regex patterns
 path_to_platform = "../regex/platform.json"
 
 # Will change. This is just for testing.
-path_to_json = "../data_generator/data_2023-10-03_13-52-43.json"
+path_to_json = "../unfiltered_data/data_2023-10-03_13-52-43.json"
 
 # Load the regex patterns from platform.json
 with open(path_to_platform, "r") as regex_file:
@@ -45,8 +50,11 @@ def data_filtering():
                 # Check if the url matches the regex
                 if regex.search(item["url"]):
                     filtered_data.append(item)
+
+    file_name = "filtered_data.json"
+    file_path = os.path.join(save_path, file_name)
     # Write the filtered data to a json file
-    with open("filtered_data.json", "w") as filtered_file:
+    with open(file_path, "w") as filtered_file:
         json.dump(filtered_data, filtered_file)
     return filtered_data
 
