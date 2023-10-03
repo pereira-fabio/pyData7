@@ -1,0 +1,1254 @@
+[
+    { "platform": "github",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)github.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type": "commit"
+            },{
+                "regexp": "(?:git@|https://)gist.github.com[:/]([a-zA-Z0-9-_\\.]*)/([a-zA-Z0-9]+)",
+                "user": 1,
+                "hash": 2,
+                "type": "gist"
+            },{
+                "regexp":"(?:git@|https://)github.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/pull/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull": 3,
+                "type": "pull"
+            },{
+                "regexp": "(?:git@|https://)github.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type": "issue"
+            }
+        ],
+        "rebuild": "git@github.com:$organisation/$project.git",
+        "replace": [
+            {
+                "old_organisation": "golang",
+                "old_project": "*",
+                "new_platform": "googlesource",
+                "new_organisation": "go",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "GerritCodeReview",
+                "old_project": "*",
+                "new_platform": "googlesource",
+                "new_organisation": "gerrit",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "chromium",
+                "old_project": "*",
+                "new_platform": "googlesource",
+                "new_organisation": "chromium",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "PDFium",
+                "old_project": "PDFium",
+                "new_platform": "googlesource",
+                "new_organisation": "pdfium",
+                "new_project": "pdfium"
+            },
+            {
+                "old_organisation": "google",
+                "old_project": "skia",
+                "new_platform": "googlesource",
+                "new_organisation": "skia",
+                "new_project": "skia"
+            },
+            {
+                "old_organisation": "google",
+                "old_project": "boringssl",
+                "new_platform": "googlesource",
+                "new_organisation": "boringssl",
+                "new_project": "boringssl"
+            },
+            {
+                "old_organisation": "gnutls",
+                "old_project": "gnutls",
+                "new_platform": "gitlab",
+                "new_organisation": "gnutls",
+                "new_project": "gnutls"
+            },
+            {
+                "old_organisation": "torvalds",
+                "old_project": "linux",
+                "new_platform": "kernel",
+                "new_organisation": "*",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "wireshark",
+                "old_project": "wireshark",
+                "new_platform": "gitlab",
+                "new_organisation": "wireshark",
+                "new_project": "wireshark"
+            },
+            {
+                "old_organisation": "vogel",
+                "old_project": "kadu",
+                "new_platform": "gitlab",
+                "new_organisation": "kadu",
+                "new_project": "kadu"
+            },
+            {
+                "old_organisation": "qt",
+                "old_project": "*",
+                "new_platform": "qt",
+                "new_organisation": "*",
+                "new_project": "add('qt/')"
+            },
+            {
+                "old_organisation": "GNOME",
+                "old_project": "*",
+                "new_platform": "gnome",
+                "new_organisation": "*",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "Debian",
+                "old_project": "*",
+                "new_platform": "salsa-debian",
+                "new_organisation": "debian",
+                "new_project": "*"
+            },{
+                "old_organisation":"banu",
+                "old_project":"tinyproxy",
+                "new_platform":"github",
+                "new_organisation":"tinyproxy",
+                "new_project":"tinyproxy"
+            },
+            {
+                "old_organisation":"Enalean",
+                "old_project":"tuleap",
+                "new_platform":"tuleap",
+                "new_organisation":"tuleap",
+                "new_project":"tuleap/stable"
+            },
+            {
+                "old_organisation":"wine-mirror",
+                "old_project":"wine",
+                "new_platform":"wine",
+                "new_organisation":"winehq",
+                "new_project":"wine"
+            },{
+                "old_organisation":"isc-projects",
+                "old_project":"*",
+                "new_platform":"isc",
+                "new_organisation":"isc-projects",
+                "new_project":"*"
+            },{
+                "old_organisation":"mirror",
+                "old_project":"tinycc",
+                "new_platform":"or-cz",
+                "new_organisation":"or-cz",
+                "new_project":"*"
+            },{
+                "old_organisation":"letolabs",
+                "old_project":"nasm",
+                "new_platform":"or-cz",
+                "new_organisation":"or-cz",
+                "new_project":"*"
+            },            {
+                "old_organisation": "libvirt",
+                "old_project": "*",
+                "new_platform": "gitlab",
+                "new_organisation": "libvirt",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "gentoo",
+                "old_project": "*",
+                "new_platform": "gentoo",
+                "new_organisation": "gentoo",
+                "new_project": "*"
+            },{
+                "old_organisation": "BIRD",
+                "old_project": "*",
+                "new_platform": "niz-cz",
+                "new_organisation": "labs",
+                "new_project": "*"
+            },{
+                "old_organisation": "videolan",
+                "old_project": "*",
+                "new_platform": "videolan",
+                "new_organisation": "*",
+                "new_project": "*"
+            },{
+                "old_organisation": "github",
+                "old_project": "putty",
+                "new_platform": "tartarus",
+                "new_organisation": "simon",
+                "new_project": "*"
+            },{
+                "old_organisation": "spip",
+                "old_project": "SPIP",
+                "new_platform": "spip",
+                "new_organisation": "*",
+                "new_project": "spip"
+            }
+        ]
+    },
+    { "platform": "gitlab",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)gitlab.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)gitlab.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull":3,
+                "type":"pull"
+            },{
+                "regexp":"(?:git@|https://)gitlab.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type":"issue"
+            }
+        ],
+        "rebuild": "git@gitlab.com:$organisation/$project.git",
+        "replace": []
+    },
+    { "platform": "gnome",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)gitlab.gnome.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)git.gnome.org[:/](browse/)*([a-zA-Z0-9-_\\.\\+]*)/commit/(.*id=)([a-zA-Z0-9]+)",
+                "organisation": "GNOME",
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)gitlab.gnome.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull":3,
+                "type":"pull"
+            },{
+                "regexp":"(?:git@|https://)gitlab.gnome.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type":"issue"
+            }
+        ],
+        "rebuild": "git@git@gitlab.gnome.org:$organisation/$project.git",
+        "replace": []
+    },
+    { "platform": "googlesource",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)([a-zA-Z0-9\\-]*).googlesource.com[:/]([a-zA-Z0-9-_\\./]*)/\\+/([a-zA-Z0-9]+)",
+                "rebuild": "https://$organisation.googlesource.com/project",
+                "organisation": 1,
+                "project": 2,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "replace": [
+            {
+                "old_organisation": "kernel",
+                "old_project": "*",
+                "new_platform": "kernel",
+                "new_organisation": "pub",
+                "new_project": "remove('pub/')"
+            }
+        ]
+    },
+    {"platform": "kernel",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)git.kernel.org[:/].*/git/([a-zA-Z0-9-]*)/([a-zA-Z0-9-/]*).git/commit/.*id=([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 3,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)git.kernel.org/linus/([a-zA-Z0-9]+)",
+                "organisation": "torvalds",
+                "project": "linux",
+                "commit": 1,
+                "type":"commit"
+            }
+        ],
+        "rebuild": "git://git.kernel.org/$organisation/$project.git"
+    },
+    { "platform": "perl",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)([a-zA-Z0-9\\-]*).git.perl.org/(.*)/(commit|commitdiff|tree)/([a-zA-Z0-9]+)",
+                "organisation": "Perl",
+                "project": "perl5",
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "replace": [
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+    },
+    { "platform": "gitorious",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://).*gitorious.org[:/]([a-zA-Z0-9\\-_\\.]*)[/]([a-zA-Z0-9\\-_\\.]*).*/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "replace": [
+            {
+                "old_organisation": "qt",
+                "old_project": "*",
+                "new_platform": "qt",
+                "new_organisation": "*",
+                "new_project": "add('qt/')"
+            },
+            {
+                "old_organisation": "kadu",
+                "old_project": "kadu",
+                "new_platform": "gitlab",
+                "new_organisation": "*",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "testlink-ga",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "dnozay",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "packagekit",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "hughsie",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "libxslt",
+                "old_project": "*",
+                "new_platform": "gnome",
+                "new_organisation": "GNOME",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "atrix-aosp",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "gnutls",
+                "old_project": "gnutls",
+                "new_platform": "gitlab",
+                "new_organisation": "gnutls",
+                "new_project": "gnutls"
+            }
+        ]
+    },
+    { "platform": "wireshark",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)code.wireshark.org[:/](.*)commit;h=([a-zA-Z0-9]+)",
+                "organisation": "wireshark",
+                "project": "wireshark",
+                "commit": 2,
+                "type":"commit"
+            }
+        ],
+        "replace": [
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "gitlab",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+    },
+    { "platform": "qt",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)code.qt.io[:/](cgit/)*([a-zA-Z0-9\\-_\\./]*).git/commit/(\\?id=)*([a-zA-Z0-9]+)",
+                "organisation": "qt",
+                "project": 3,
+                "commit": 5,
+                "type":"commit"
+            }
+        ],
+        "rebuild": "git://code.qt.io/$project.git",
+        "replace": []
+    },
+    { "platform": "exim",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)git.exim.org[:/]([a-zA-Z0-9\\-_\\./]*).git/(commit|commitdiff)/([a-zA-Z0-9]+)",
+                "organisation": "Exim",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "replace": [
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+    },
+    { "platform": "openssl",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)git.openssl.org[:/](.*p=)([a-zA-Z0-9\\-_\\./]*).git(.*h=)([a-zA-Z0-9]+)",
+                "organisation": "openssl",
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            }
+        ],
+        "replace": [
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+    },
+    { "platform": "freedesktop",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)gitlab.freedesktop.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)gitlab.freedesktop.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull":3,
+                "type":"pull"
+            },{
+                "regexp":"(?:git@|https://)gitlab.freedesktop.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type":"issue"
+            },
+            {
+                "regexp": "(?:git@|https://)cgit.freedesktop.org[:/]([a-zA-Z0-9_\\.-]*)/commit/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": "freedesktop",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)cgit.freedesktop.org[:/]([a-zA-Z0-9_\\.-]*)/([a-zA-Z0-9-_\\./]*)/commit/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            }
+        ],
+        "rebuild": "git@gitlab.freedesktop.org:$project.git",
+        "replace": []
+    },
+    { "platform": "oss-oracle",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)oss.oracle.com[:/](git*.*p=)([a-zA-Z0-9_\\./-]*).git(.*h=*)([a-zA-Z0-9]+)",
+                "organisation": "oracle",
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            }
+        ],
+        "rebuild": "git://oss.oracle.com/git/$project.git"
+    },
+    { "platform": "anongit-openssh",
+        "regexps": [
+            {
+                "regexp":"(?:git@|https://)anongit.mindrot.org[:/]([a-zA-Z0-9_\\.-]*)/commit/.*id=([a-zA-Z0-9]+)",
+                "organisation": "openssh",
+                "project": 1,
+                "commit":2,
+                "type":"commit"
+            }],
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "openssh.git",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "openssh-portable"
+            }
+        ],
+        "rebuild": ""
+    },
+    { "platform": "anonscm-debian",
+        "regexps":[{
+            "regexp": "(?:git@|https://)anonscm.debian.org[:/].*/([a-zA-Z0-9_\\.-]*).git/commit/.*id=([a-zA-Z0-9]+)",
+            "organisation":"debian",
+            "project":1,
+            "commit":2,
+            "type":"commit"
+        }],
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "imagemagick",
+                "new_platform": "github",
+                "new_organisation": "ImageMagick",
+                "new_project": "ImageMagick"
+            },
+            {
+                "old_organisation": "*",
+                "old_project": "devscripts",
+                "new_platform": "salsa-debian",
+                "new_organisation": "debian",
+                "new_project": "devscripts"
+            },
+            {
+                "old_organisation": "*",
+                "old_project": "tardiff",
+                "new_platform": "salsa-debian",
+                "new_organisation": "debian",
+                "new_project": "tardiff"
+            },{
+                "old_organisation": "*",
+                "old_project": "dpkg",
+                "new_platform": "dpkg",
+                "new_organisation": "dpkg",
+                "new_project": "dpkg"
+            },{
+                "old_organisation": "*",
+                "old_project": "linux",
+                "new_platform": "kernel",
+                "new_organisation": "pub",
+                "new_project": "scm/linux/kernel/git/torvalds/linux.git"
+            },{
+                "old_organisation": "*",
+                "old_project": "archvsync",
+                "new_platform": "salsa-debian",
+                "new_organisation": "mirror-team",
+                "new_project": "*"
+            },{
+                "old_organisation": "*",
+                "old_project": "libconfig-model-perl",
+                "new_platform": "salsa-debian",
+                "new_organisation": "perl-team",
+                "new_project": "modules/packages/libconfig-model-perl"
+            },{
+                "old_organisation": "*",
+                "old_project": "libdbd-mysql-perl",
+                "new_platform": "salsa-debian",
+                "new_organisation": "perl-team",
+                "new_project": "modules/packages/libdbd-mysql-perl"
+            },{
+                "old_organisation": "*",
+                "old_project": "postgresql-common",
+                "new_platform": "salsa-debian",
+                "new_organisation": "postgresql",
+                "new_project": "postgresql-common"
+            },{
+                "old_organisation":"*",
+                "old_project": "mp3splt",
+                "new_platform": "salsa-debian",
+                "new_organisation": "ron",
+                "new_project": "mp3splt"
+            }
+        ],
+        "rebuild": ""
+    },
+    { "platform": "salsa-debian",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)salsa.debian.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            }
+        ],
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "imagemagick",
+                "new_platform": "github",
+                "new_organisation": "ImageMagick",
+                "new_project": "ImageMagick"
+            },{
+                "old_organisation": "dpkg-team",
+                "old_project": "*",
+                "new_platform": "dpkg",
+                "new_organisation": "dpkg",
+                "new_project": "*"
+            }
+
+        ],
+        "rebuild":  "git@salsa.debian.org:$organisation/$project.git"
+
+    },
+    { "platform":"dpkg",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.dpkg.org[:/].*/([a-zA-Z0-9_\\.-]*).git/commit/.*id=([a-zA-Z0-9]+)",
+                "organisation":"dpkg",
+                "project":1,
+                "commit":2,
+                "type":"commit"
+            }
+        ],
+        "rebuild": "https://git.dpkg.org/git/dpkg/$project.git"
+    },
+    {"platform": "barton",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)arthur.barton.de[:/].*p=([a-zA-Z0-9_\\.-]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation":"barton",
+                "project":1,
+                "commit":2,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"",
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "ngircd",
+                "new_platform": "github",
+                "new_organisation": "ngircd",
+                "new_project": "ngircd"
+            }
+        ]
+    },
+    { "platform": "banu",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)banu.com[:/].*cgit/([a-zA-Z0-9_\\.-]*).*id=([a-zA-Z0-9]+)",
+                "organisation":"banu",
+                "project":1,
+                "commit":2,
+                "type":"commit"
+            }
+        ], 
+        "rebuild":"",
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "tinyproxy",
+                "new_platform": "github",
+                "new_organisation": "tinyproxy",
+                "new_project": "tinyproxy"
+            }
+        ]
+    },
+    { "platform": "kde",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)cgit.kde.org[:/]([a-zA-Z0-9_\\./-]*).git(/*-*)/commit/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": "KDE",
+                "project": 1,
+                "commit": 4,
+                "type":"commit"
+            },{
+                "regexp": "(?:git@|https://)quickgit.kde.org[:/].*p=([a-zA-Z0-9_\\./-]*).git.*(h=*)([a-zA-Z0-9]+)",
+                "organisation": "KDE",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"",
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+    },
+    {"platform":"aurora",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://).*codeaurora.org/cgit/([a-zA-Z0-9_\\.-]*)/([a-zA-Z0-9_\\./-]*)/commit/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },{
+                "regexp": "(?:git@|https://).*source.codeaurora.org/([a-zA-Z0-9_\\.-]*)/([a-zA-Z0-9_\\./-]*)/commit/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"https://source.codeaurora.org/$organisation/$project"
+    },
+    {"platform":"derf-homelinux",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://).*derf.homelinux.org/git/([a-zA-Z0-9_\\./-]*)/commit/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": "derf",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+            } 
+        ],
+        "rebuild":"",
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+
+    },
+    {"platform":"w1",
+
+        "regexps":[
+               {
+                   "regexp": "(?:git@|https://)w1.fi/cgit/([a-zA-Z0-9_\\./-]*)/commit/.*(id=*)([a-zA-Z0-9]+)",
+                   "organisation": "w1",
+                   "project": 1,
+                   "commit": 3,
+                   "type":"commit"
+               }
+           ],
+           "rebuild":"git://w1.fi/$project.git"
+    },
+    {"platform":"tuleap",
+        "regexps":[
+        {
+            "regexp": "(?:git@|https://)tuleap.net/plugins/git/([a-zA-Z0-9_\\.-]*)/([a-zA-Z0-9_\\.-/]*)\\?.*(h=)([a-zA-Z0-9]+)",
+            "organisation": 1,
+            "project": 2,
+            "commit": 4,
+            "type":"commit"
+        }],
+        "rebuild":"https://tuleap.net/plugins/git/$organisation/$project.git"
+    },
+    {"platform":"sourceware",
+        "regexps":[
+            {
+                "regexp":"(?:git@|https://)sourceware.org/git/.*p=([a-zA-Z0-9_\\.-]*).git.*(h=*)([a-zA-Z0-9]+)",
+                "organisation": "sourceware",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"git://sourceware.org/git/$project.git"
+    },
+    {"platform":"sourceforge",
+        "regexps":[
+            {
+                "regexp":"(?:git@|https://)sourceforge.net/p/([a-zA-Z0-9_\\.-]*)/([a-zA-Z0-9_\\.-]*)/ci/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"git://git.code.sf.net/p/$organisation/$project"
+    },
+    {"platform":"wine",
+        "regexps":[
+            {
+                "regexp":"(?:git@|https://)source.winehq.org/git/([a-zA-Z0-9_\\.-]*).git/commit/([a-zA-Z0-9]+)",
+                "organisation": "winehq",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"git://source.winehq.org/git/$project.git"
+    },
+    {"platform":"isc",
+        "regexps":[
+            {
+                "regexp":"(?:git@|https://)source.isc.org/.*p=([a-zA-Z0-9_\\.-]*).git.*(h=*)([a-zA-Z0-9]+)",
+                "organisation": "isc-projects",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)gitlab.isc.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)gitlab.isc.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull":3,
+                "type":"pull"
+            },{
+                "regexp":"(?:git@|https://)gitlab.isc.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type":"issue"
+            }
+
+        ],
+        "rebuild":"git@gitlab.isc.org:$organisation/$project.git"
+    },
+    {"platform":"rmaples",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)roy.marples.name[:/](.*)git/([a-zA-Z0-9_\\./-]*).git/commit/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": "rsmarples",
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            }
+        ],
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ],
+        "rebuild":""
+
+    },
+    {"platform":"tizen",
+        "regexps":[
+            {
+                    "regexp": "(?:git@|https://)review.tizen.org[:/](.*)git/.*p=([a-zA-Z0-9_\\./-]*).git;.*(h=*)([a-zA-Z0-9]+)",
+                    "organisation": "tizen",
+                    "project": 2,
+                    "commit": 4,
+                    "type":"commit"
+            }
+        ],
+        "rebuild":"https://git.tizen.org/cgit/$project"
+    },
+    {"platform":"entrouvert",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)repos.entrouvert.org[:/]([a-zA-Z0-9_\\./-]*).git/.*(id=*)([a-zA-Z0-9]+)",
+                "organisation": "entrouvert",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+        }
+        ],
+        "rebuild":"git://git.entrouvert.org/$project.git"
+    },
+    {"platform":"or-cz",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)repo.or.cz[:/]([a-zA-Z0-9_\\./-]*).git/commit.*/([a-zA-Z0-9]+)",
+                "organisation": "or-cz",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+        }],
+        "rebuild":"git://repo.or.cz/$project.git"
+    },
+    {"platform":"libvirt",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)libvirt.org[:/].*p=([a-zA-Z0-9_\\./-]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "libvirt",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+        }],
+        "rebuild":"",
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "gitlab",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+    },
+    {"platform":"htcondor",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)htcondor-git.cs.wisc.edu[:/].*p=([a-zA-Z0-9_\\./-]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "htcondor",
+                "project": "htcondor",
+                "commit": 2,
+                "type":"commit"
+        }
+        ],"rebuild":"",
+        "replace":[{
+            "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"
+            }
+        ]
+    },
+    {"platform":"gnunet",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://).*gnunet.org.*/([a-zA-Z0-9_\\./-]*).git.*id=([a-zA-Z0-9]+)",
+                "organisation": "gnunet",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+        }],
+        "rebuild":"git://gnunet.org/$project.git"
+    },
+    {"platform":"torproject",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.*.torproject.org.*/([a-zA-Z0-9_\\./-]*).git/commit.*/(\\?id=)*([a-zA-Z0-9]+)",
+                "organisation": "torproject",
+                "project": 1,
+                "commit": 3,
+                "type":"commit"
+        },
+        {
+            "regexp": "(?:git@|https://)gitlab.torproject.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+            "organisation": "torproject",
+            "project": 2,
+            "pull":3,
+            "type":"pull"
+        },{
+            "regexp":"(?:git@|https://)gitlab.torproject.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+            "organisation": "torproject",
+            "project": 2,
+            "issue": 4,
+            "type":"issue"
+        }
+    ],
+        "rebuild":"https://git.torproject.org/$project.git"
+    },
+    {"platform":"gentoo",
+        "regexps":[
+                {
+                    "regexp": "(?:git@|https://)gitweb.gentoo.org/repo/([a-zA-Z0-9_\\./-]*).git/commit.*/(\\?id=)*([a-zA-Z0-9]+)",
+                    "organisation": "gentoo",
+                    "project": 1,
+                    "commit": 3,
+                    "type":"commit"
+            }
+        ],
+        "rebuild":"https://anongit.gentoo.org/git/repo/$project.git"
+    },
+    {"platform":"marlam",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)gitlab.marlam.de[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },{
+                "regexp": "(?:git@|https://)git.marlam.de/gitweb/.*p=([a-zA-Z0-9-_\\.]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "marlam",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+            }],
+            "rebuild":"https://git.marlam.de/git/$project.git"
+    },
+    {"platform":"niz-cz",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)gitlab.labs.nic.cz[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)gitlab.labs.nic.cz[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull":3,
+                "type":"pull"
+            },{
+                "regexp":"(?:git@|https://)gitlab.labs.nic.cz[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type":"issue"
+            }
+        ],
+        "rebuild": "git@gitlab.labs.nic.cz:$organisation/$project.git",
+        "replace": []
+    },
+    {"platform":"apache",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://).*apache.org/repos/.*p=([a-zA-Z0-9-_\\.]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "apache",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],
+        "rebuild": "",
+        "replace": [{
+            "old_organisation": "*",
+            "old_project": "*",
+            "new_platform": "github",
+            "new_organisation": "*",
+            "new_project": "*"
+        }]
+    },
+    {"platform":"zx2c4",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)git.zx2c4.com/([a-zA-Z0-9-_\\.]*)/.*id=([a-zA-Z0-9]+)",
+                "organisation": "zx2c4",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],
+        "rebuild": "git://git.zx2c4.com/$project"
+    },
+    {"platform": "zuul",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)git.zuul-ci.org/cgit/([a-zA-Z0-9-_\\.]*)/commit/.*id=([a-zA-Z0-9]+)",
+                "organisation": "zuul",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],
+        "rebuild":[],
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "opendev",
+                "new_organisation": "*",
+                "new_project": "*"   
+            }
+        ]
+    },
+    {"platform":"opendev",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)opendev.org/([a-zA-Z0-9-_\\.]*)/([a-zA-Z0-9-_\\./]*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"https://opendev.org/$organisation/$project"
+    },
+    {"platform":"xiph",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)git.xiph.org/.*p=([a-zA-Z0-9-_\\.]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "xiph",
+                "project":1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"",
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"   
+            }
+        ]
+    },
+    {"platform":"videolan",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)git.videolan.org/.*p=([a-zA-Z0-9-_\\./]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "videolan",
+                "project":1,
+                "commit": 2,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)code.videolan.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type":"commit"
+            },
+            {
+                "regexp": "(?:git@|https://)code.videolan.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull":3,
+                "type":"pull"
+            },{
+                "regexp":"(?:git@|https://)code.videolan.org[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type":"issue"
+            }
+        ],
+        "rebuild":"git@code.videolan.org:$organisation/$project.git"
+
+    },
+    {"platform":"tukaani",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.tukaani.org/.*p=([a-zA-Z0-9-_\\./]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "tukaani",
+                "project":1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],"rebuild":"https://git.tukaani.org/$project.git"
+    },
+    { "platform":"tt-rss",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.tt-rss.org/([a-zA-Z0-9-_\\.]*)/([a-zA-Z0-9-_\\.]*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project":2,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],"rebuild":"https://git.tt-rss.org/$organisation/$project.git",
+        "replace":[
+            {
+                "old_organisation": "git",
+                "old_project": "*",
+                "new_platform": "tt-rss",
+                "new_organisation": "fox",
+                "new_project": "*"   
+            }
+        ]
+    },
+    { "platform":"tartarus",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.tartarus.org/.*p=([a-zA-Z0-9-_\\.]*)/([a-zA-Z0-9-_\\.]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project":2,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],"rebuild":"git://git.tartarus.org/$organisation/$project.git"
+    },
+    {"platform":"strongswan",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.strongswan.org/.*p=([a-zA-Z0-9-_\\./]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "strongswan",
+                "project":1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],"rebuild":"",
+        "replace":[
+            {
+                "old_organisation": "*",
+                "old_project": "*",
+                "new_platform": "github",
+                "new_organisation": "*",
+                "new_project": "*"   
+            }
+        ]
+    },
+    {"platform":"spip",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.spip.net/([a-zA-Z0-9-_\\.]*)/([a-zA-Z0-9-_\\.]*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project":2,
+                "commit": 3,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"https://git.spip.net/$organisation/$project.git",
+        "replace":[
+            {
+                "old_organisation": "SPIP",
+                "old_project": "*",
+                "new_platform": "spip",
+                "new_organisation": "spip",
+                "new_project": "*"   
+            }
+        ]
+    },
+    {"platform":"shibboleth",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.shibboleth.net/.*p=([a-zA-Z0-9-_\\./]*).git.*h=([a-zA-Z0-9]+)",
+                "organisation": "strongswan",
+                "project":1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],
+        "rebuild":"https://git.shibboleth.net/$project.git"
+    },
+    { "platform":"savannah",
+        "regexps":[
+            {
+                "regexp": "(?:git@|https://)git.savannah.gnu.org/cgit/([a-zA-Z0-9-_\\./]*)/commit/.*id=([a-zA-Z0-9]+)",
+                "organisation": "gnu",
+                "project": 1,
+                "commit": 2,
+                "type":"commit"
+            }
+        ],"rebuild":"git://git.savannah.gnu.org/$project.git"
+    }
+]
