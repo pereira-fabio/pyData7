@@ -125,9 +125,6 @@ def get_cve_patched(response):
 # an empty list to store all the results
 all_results = []
 
-# total results
-total_results = 0
-
 # results per page (default at 2000/page)
 resultsPerPage = 2000
 
@@ -135,37 +132,48 @@ resultsPerPage = 2000
 data_0 = main_request(baseurl, 0)
 response_code = requests.get(baseurl).status_code
 
-# checks if the response is 200
-if response_code != 200:
-    logging.error('Could not get the data from the API', response_code)
-    exit(1)
-else:
-    # whole database
-    for start_index in range(0, get_total_results(data_0), resultsPerPage):
-        data = main_request(baseurl, start_index)
-        all_results.extend(get_cve_patched(data))
-        total_results = total_results + get_length(data)
-        print(total_results, 'vulnerabilities were retrieved')
-    logging.info('Data was successfully retrieved from the API')
 
-# single page test
-# data = main_request(baseurl,0)
-# all_results.extend(get_cve_patched(data))
-# get_cvss(data,0)
-# print(all_results.extend(get_cvss(data,0)))
+def data_retrieval():
+    # total results
+    total_results = 0
+    # checks if the response is 200
+    # if response_code != 200:
+    #     logging.error('Could not get the data from the API', response_code)
+    #     exit(1)
+    # else:
+    #     # whole database
+    #     for start_index in range(0, get_total_results(data_0), resultsPerPage):
+    #         data = main_request(baseurl, start_index)
+    #         all_results.extend(get_cve_patched(data))
+    #         total_results = total_results + get_length(data)
+    #         print(total_results, 'vulnerabilities were retrieved')
+    #     logging.info('Data was successfully retrieved from the API')
+
+    # single page test
+    data = main_request(baseurl, 0)
+    all_results.extend(get_cve_patched(data))
+    get_cvss(data, 0)
+
+    return json_file_generation()
 
 
-# Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
-current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+def json_file_generation():
+    # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-# Saves the data into a json file with the current date and time
-file_name = f"data_{current_time}.json"
+    # Saves the data into a json file with the current date and time
+    file_name = f"data_{current_time}.json"
 
-# Creates the path to save the json file
-file_path = os.path.join(save_path, file_name)
+    # Creates the path to save the json file
+    file_path = os.path.join(save_path, file_name)
 
-# Writes the data into a json file
-with open(file_path, "w") as json_file:
-    json.dump(all_results, json_file)
+    # Writes the data into a json file
+    with open(file_path, "w") as json_file:
+        json.dump(all_results, json_file)
 
-logging.info('Data was successfully saved into a json file')
+    logging.info('Data was successfully saved into a json file')
+    return file_path
+
+
+if __name__ == "__main__":
+    data_retrieval()

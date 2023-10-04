@@ -1,6 +1,8 @@
 import json
 import re
 import os
+import datetime
+from pydata7.data_generator.main import data_retrieval
 
 # Path to the filtered data
 save_path = "../filtered_data/"
@@ -8,8 +10,9 @@ save_path = "../filtered_data/"
 # Path to the regex patterns
 path_to_platform = "../regex/platform.json"
 
-# Will change. This is just for testing.
-path_to_json = "../unfiltered_data/data_2023-10-03_13-52-43.json"
+# Path to the data from the data_generator
+path_to_json = data_retrieval()
+#"../unfiltered_data/data_2023-10-03_13-52-43.json"
 
 # Load the regex patterns from platform.json
 with open(path_to_platform, "r") as regex_file:
@@ -51,12 +54,20 @@ def data_filtering():
                 if regex.search(item["url"]):
                     filtered_data.append(item)
 
-    file_name = "filtered_data.json"
+    # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    # Saves the data into a json file with the current date and time
+    file_name = f"filtered_data_{current_time}.json"
+
+    # Creates the path to save the json file
     file_path = os.path.join(save_path, file_name)
+
     # Write the filtered data to a json file
     with open(file_path, "w") as filtered_file:
         json.dump(filtered_data, filtered_file)
     return filtered_data
 
 
-data_filtering()
+if __name__ == "__main__":
+    data_filtering()
