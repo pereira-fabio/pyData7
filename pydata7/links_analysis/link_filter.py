@@ -11,10 +11,9 @@ save_path = "../filtered_data/"
 path_to_platform = "../regex/platform.json"
 
 # Path to the data from the data_generator
-path_to_json = data_retrieval()
-#"../unfiltered_data/data_2023-10-03_13-52-43.json"
+path_to_json = "../unfiltered_data/data_2023-10-03_13-52-43.json"  #data_retrieval()
 
-# Load the regex patterns from platform.json
+# Load the regex patterns from platform.json (regex)
 with open(path_to_platform, "r") as regex_file:
     regex_data = json.load(regex_file)
 
