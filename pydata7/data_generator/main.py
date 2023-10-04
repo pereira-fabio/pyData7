@@ -137,22 +137,22 @@ def data_retrieval():
     # total results
     total_results = 0
     # checks if the response is 200
-    # if response_code != 200:
-    #     logging.error('Could not get the data from the API', response_code)
-    #     exit(1)
-    # else:
-    #     # whole database
-    #     for start_index in range(0, get_total_results(data_0), resultsPerPage):
-    #         data = main_request(baseurl, start_index)
-    #         all_results.extend(get_cve_patched(data))
-    #         total_results = total_results + get_length(data)
-    #         print(total_results, 'vulnerabilities were retrieved')
-    #     logging.info('Data was successfully retrieved from the API')
+    if response_code != 200:
+        logging.error('Could not get the data from the API', response_code)
+        exit(1)
+    else:
+        # whole database
+        for start_index in range(0, get_total_results(data_0), resultsPerPage):
+            data = main_request(baseurl, start_index)
+            all_results.extend(get_cve_patched(data))
+            total_results = total_results + get_length(data)
+            print(total_results, 'vulnerabilities were retrieved')
+        logging.info('Data was successfully retrieved from the API')
 
     # single page test
-    data = main_request(baseurl, 0)
-    all_results.extend(get_cve_patched(data))
-    get_cvss(data, 0)
+    # data = main_request(baseurl, 0)
+    # all_results.extend(get_cve_patched(data))
+    # get_cvss(data, 0)
 
     return json_file_generation()
 
