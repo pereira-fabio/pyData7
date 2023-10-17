@@ -148,7 +148,7 @@ def data_retrieval():
         print(total_results, 'vulnerabilities were retrieved')
     except requests.exceptions.RequestException as err:
         raise SystemExit(err)
-
+    print(len(all_results), "links were retrieved")
     return json_file_generation()
 
 

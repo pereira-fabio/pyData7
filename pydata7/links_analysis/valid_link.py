@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import datetime
+import concurrent.futures
 from pydata7.links_analysis.link_filter import data_filtering
 
 # Path to the filtered data
@@ -57,4 +58,6 @@ def json_file_generation():
 
 
 if __name__ == "__main__":
-    valid_link()
+    num_threads = 10
+    with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
+        executor.map(valid_link, range(num_threads))
