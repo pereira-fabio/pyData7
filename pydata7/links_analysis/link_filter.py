@@ -11,7 +11,7 @@ save_path = "../data/"
 path_to_platform = "../regex/platform.json"
 
 # Path to the data from the data_generator
-path_to_json = "../data/data_2023-10-03_13-52-43.json"  #data_retrieval()
+path_to_json = data_retrieval() #"../data/data_2023-10-03_13-52-43.json"
 
 # Load the regex patterns from platform.json (regex)
 with open(path_to_platform, "r") as regex_file:
@@ -36,10 +36,11 @@ def get_unique_cve_id(path_to_json):
 
 
 def data_filtering():
-    # A list to store the complied regex
-    list_regex = []
+
     # Iterate through the regex patterns
     for regex in regex_data:
+        # A list to store the complied regex
+        list_regex = []
         # Iterate through the regex patterns and compile them
         for regex in regex["regexps"]:
             # Compile the regex from platform.json
@@ -52,7 +53,11 @@ def data_filtering():
                 # Check if the url matches the regex
                 if regex.search(item["url"]):
                     filtered_data.append(item)
+    print(len(filtered_data), "links were filtered")
+    return json_file_generation()
 
+
+def json_file_generation():
     # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
     current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -65,6 +70,8 @@ def data_filtering():
     # Write the filtered data to a json file
     with open(file_path, "w") as filtered_file:
         json.dump(filtered_data, filtered_file)
+
+    # returns the path to the json file, so it can be used in the next function
     return file_path
 
 

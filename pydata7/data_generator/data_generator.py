@@ -1,20 +1,16 @@
 import requests
 import json
 import datetime
-import logging
 import os
 
 # API url
 baseurl = 'https://services.nvd.nist.gov/rest/json/cves/2.0'
 save_path = "../data/"
-# Configuring the logger
-logging.basicConfig(filename='data_generator.log', level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
 
 
-# main request to get all data (for the default 2000 first per page)
-def main_request(baseurl, x):
-    # f'?startIndex={x}' will help to adavance into the next values
+# Main request to get all data (for the default 2000 first per page)
+def main_request(x):
+    # f'?startIndex={x}' will help to advance into the next values
     response = requests.get(baseurl + f'?startIndex={x}')
     # checks if the response is 200
     return response.json()
@@ -129,30 +125,29 @@ all_results = []
 resultsPerPage = 2000
 
 # This will help to get the total results of the first page for the range
-data_0 = main_request(baseurl, 0)
+data_0 = main_request(0)
 response_code = requests.get(baseurl).status_code
 
 
 def data_retrieval():
     # total results
     total_results = 0
-    # checks if the response is 200
-    if response_code != 200:
-        logging.error('Could not get the data from the API', response_code)
-        exit(1)
-    else:
-        # whole database
-        for start_index in range(0, get_total_results(data_0), resultsPerPage):
-            data = main_request(baseurl, start_index)
-            all_results.extend(get_cve_patched(data))
-            total_results = total_results + get_length(data)
-            print(total_results, 'vulnerabilities were retrieved')
-        logging.info('Data was successfully retrieved from the API')
 
-    # single page test
-    # data = main_request(baseurl, 0)
-    # all_results.extend(get_cve_patched(data))
-    # get_cvss(data, 0)
+    # In case of a timeout or a connection error, the program will exit
+    try:
+        # checks if the response is 200
+        if response_code != 200:
+            print("API is not available", response_code)
+            exit(1)
+        else:
+            # For loop to go through all the pages
+            for start_index in range(0, get_total_results(data_0), resultsPerPage):
+                data = main_request(start_index)
+                all_results.extend(get_cve_patched(data))
+                total_results = total_results + get_length(data)
+        print(total_results, 'vulnerabilities were retrieved')
+    except requests.exceptions.RequestException as err:
+        raise SystemExit(err)
 
     return json_file_generation()
 
@@ -171,7 +166,7 @@ def json_file_generation():
     with open(file_path, "w") as json_file:
         json.dump(all_results, json_file)
 
-    logging.info('Data was successfully saved into a json file')
+    # returns the path to the json file, so it can be used in the next function
     return file_path
 
 
