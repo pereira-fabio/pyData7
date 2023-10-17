@@ -2,16 +2,16 @@ import json
 import re
 import os
 import datetime
-from pydata7.data_generator.main import data_retrieval
+from pydata7.data_generator.data_generator import data_retrieval
 
 # Path to the filtered data
-save_path = "../filtered_data/"
+save_path = "../data/"
 
 # Path to the regex patterns
 path_to_platform = "../regex/platform.json"
 
 # Path to the data from the data_generator
-path_to_json = "../unfiltered_data/data_2023-10-03_13-52-43.json"  #data_retrieval()
+path_to_json = "../data/data_2023-10-03_13-52-43.json"  #data_retrieval()
 
 # Load the regex patterns from platform.json (regex)
 with open(path_to_platform, "r") as regex_file:
@@ -36,10 +36,10 @@ def get_unique_cve_id(path_to_json):
 
 
 def data_filtering():
+    # A list to store the complied regex
+    list_regex = []
     # Iterate through the regex patterns
     for regex in regex_data:
-        # A list to store the complied regex
-        list_regex = []
         # Iterate through the regex patterns and compile them
         for regex in regex["regexps"]:
             # Compile the regex from platform.json
@@ -65,7 +65,7 @@ def data_filtering():
     # Write the filtered data to a json file
     with open(file_path, "w") as filtered_file:
         json.dump(filtered_data, filtered_file)
-    return filtered_data
+    return file_path
 
 
 if __name__ == "__main__":

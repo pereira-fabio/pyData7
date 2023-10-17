@@ -14,8 +14,8 @@ filtered_collection = mydb["filtered"]
 unfiltered_collection = mydb["unfiltered"]
 
 # Path to the data (will change)
-path_to_filtered = "../filtered_data/filtered_data_2023-10-04_15-09-07.json"
-path_to_unfiltered = "../unfiltered_data/data_2023-10-03_13-52-43.json"
+path_to_filtered = "../data/filtered_data_2023-10-04_15-09-07.json"
+path_to_unfiltered = "../data/data_2023-10-03_13-52-43.json"
 
 # the data is inserted only if the collection is empty (only for testing purposes)
 # Inserting data into the database
