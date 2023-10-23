@@ -14,6 +14,8 @@ path_to_json = data_filtering()  # "../data/filtered_data_2023-10-04_15-09-07.js
 
 # A Dictionary to store filtered data which only contains the 200 status code
 valid_data = []
+# The delay interval between requests
+delay_interval = 3.6
 
 with open(path_to_json, "r") as f:
     data = json.load(f)
@@ -36,6 +38,9 @@ async def valid_link(item, session):
                     print(f"{response.status} is not valid")
         except aiohttp.ClientError as err:
             print(f"An error occurred while checking the URL {url}: {err}")
+        # Waits for the delay interval
+        print(f"Waiting for {delay_interval} seconds")
+        await asyncio.sleep(delay_interval)
     else:
         print("No URL found")
 
@@ -48,10 +53,10 @@ async def process_data():
             tasks.append(task)
         await asyncio.gather(*tasks)
         print(len(valid_data), "links were validated")
-        json_file_generation()
+        await json_file_generation()
 
 
-def json_file_generation():
+async def json_file_generation():
     # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
     current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
