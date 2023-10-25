@@ -2,7 +2,7 @@
 
 import difflib
 import os
-from gitpython import Repo
+from git import Repo
 from typing import List, Dict, Generator, Iterable
 
 
