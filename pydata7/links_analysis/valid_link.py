@@ -30,8 +30,9 @@ def has_commit():
             contains_commit.append(item)
     return json_file_generation(contains_commit, "contains_commit")
 
-#TODO check if the links is already in the database
+
 def is_valid():
+    temp = []
     valid_links = []
     with open(has_commit(), "r") as f:
         valid_commit_links = json.load(f)
@@ -39,12 +40,14 @@ def is_valid():
     for item in valid_commit_links:
         parts = item["url"].split("/")
         repository = "https://" + parts[2] + "/" + parts[3] + "/" + parts[4]
-        try:
-            response = requests.head(repository)
-            if response.status_code == 200:
-                valid_links.append(item)
-        except requests.exceptions.RequestException as err:
-            raise SystemExit(err)
+        temp.append(repository)
+        if repository not in temp:
+            try:
+                response = requests.head(repository)
+                if response.status_code == 200:
+                    valid_links.append(item)
+            except requests.exceptions.RequestException as err:
+                raise SystemExit(err)
     return json_file_generation(valid_links, "valid_links")
 
 
