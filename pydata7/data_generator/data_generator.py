@@ -2,7 +2,9 @@ import requests
 import json
 import datetime
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # API url
 baseurl = 'https://services.nvd.nist.gov/rest/json/cves/2.0'
 save_path = "../data/"
