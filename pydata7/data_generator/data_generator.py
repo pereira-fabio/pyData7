@@ -86,7 +86,7 @@ def get_cve_patched(response):
                         'published': get_vulnerabilities(response)[x]['cve']['published'],
                         'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
                         'cvss': get_cvss(response, x),
-                        'patch': 'true'
+                        'patch': 1
                     }
                     # appends the dictionary to the list
                     charlist.append(char_patched)
@@ -98,7 +98,7 @@ def get_cve_patched(response):
                         'published': get_vulnerabilities(response)[x]['cve']['published'],
                         'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
                         'cvss': get_cvss(response, x),
-                        'patch': 'false'
+                        'patch': 0
                     }
                     # appends the dictionary to the list
                     charlist.append(char_no_patched)
