@@ -40,8 +40,12 @@ def is_valid():
     for item in valid_commit_links:
         parts = item["url"].split("/")
         repository = "https://" + parts[2] + "/" + parts[3] + "/" + parts[4]
-        temp.append(repository)
+        # If temp is empty, add the first repository
+        if temp == []:
+            temp.append(repository)
+        # If the repository is not in temp, add it and check if the link is valid
         if repository not in temp:
+            temp.append(repository)
             try:
                 response = requests.head(repository)
                 if response.status_code == 200:
