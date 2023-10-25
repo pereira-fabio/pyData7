@@ -14,6 +14,7 @@ path_to_json = data_filtering()
 
 # A list to store the data that contains a commit
 contains_commit = []
+contains_issues = []
 
 with open(path_to_json, "r") as f:
     data = json.load(f)
@@ -28,6 +29,12 @@ def has_commit():
             item["organization_project"] = organization_project
             # Add the dictionary to the list
             contains_commit.append(item)
+        elif "issues" in item["url"]:
+            # Add the dictionary to the list
+            contains_issues.append(item)
+    # This is generated if needed later
+    json_file_generation(contains_issues, "contains_issues")
+    # This is the main function that will be used
     return json_file_generation(contains_commit, "contains_commit")
 
 
