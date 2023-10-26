@@ -68,54 +68,59 @@ def get_cvss(response, x):
         return '-'
 
 
+# Small variable function
+def vul_cve(response, x):
+    return get_vulnerabilities(response)[x]['cve']
+
+
 # gets the cve url for each vulnerability
 def get_cve_patched(response):
     # creating a list of dictionaries
-    charlist = []
+    vulnerabilities_list = []
     # for loop to go through all the vulnerabilities in the page
     for x in range(0, get_results_per_page(response)):
         # for loop to go through all the references in the vulnerability
-        for y in range(0, len(get_vulnerabilities(response)[x]['cve']['references'])):
+        for y in range(0, len(vul_cve(response, x)['references'])):
             # checks if there is a tag
-            if 'tags' in get_vulnerabilities(response)[x]['cve']['references'][y]:
-                if 'Patch' in get_vulnerabilities(response)[x]['cve']['references'][y]['tags']:
+            if 'tags' in vul_cve(response, x)['references'][y]:
+                if 'Patch' in vul_cve(response, x)['references'][y]['tags']:
                     # The vulnerability has a patch and the patch value is set to true
                     char_patched = {
-                        'cve_id': get_vulnerabilities(response)[x]['cve']['id'],
-                        'url': get_vulnerabilities(response)[x]['cve']['references'][y]['url'],
-                        'published': get_vulnerabilities(response)[x]['cve']['published'],
-                        'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
+                        'cve_id': vul_cve(response, x)['id'],
+                        'url': vul_cve(response, x)['references'][y]['url'],
+                        'published': vul_cve(response, x)['published'],
+                        'lastModified': vul_cve(response, x)['lastModified'],
                         'cvss': get_cvss(response, x),
                         'patch': 1
                     }
                     # appends the dictionary to the list
-                    charlist.append(char_patched)
+                    vulnerabilities_list.append(char_patched)
                 else:
                     # The vulnerability has no patch and the patch value is set to false
                     char_no_patched = {
-                        'cve_id': get_vulnerabilities(response)[x]['cve']['id'],
-                        'url': get_vulnerabilities(response)[x]['cve']['references'][y]['url'],
-                        'published': get_vulnerabilities(response)[x]['cve']['published'],
-                        'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
+                        'cve_id': vul_cve(response, x)['id'],
+                        'url': vul_cve(response, x)['references'][y]['url'],
+                        'published': vul_cve(response, x)['published'],
+                        'lastModified': vul_cve(response, x)['lastModified'],
                         'cvss': get_cvss(response, x),
                         'patch': 0
                     }
                     # appends the dictionary to the list
-                    charlist.append(char_no_patched)
+                    vulnerabilities_list.append(char_no_patched)
             else:
                 # The vulnerability has no tag, this means that there is no info, therefore Nan
                 char_no_tag = {
-                    'cve_id': get_vulnerabilities(response)[x]['cve']['id'],
-                    'url': get_vulnerabilities(response)[x]['cve']['references'][y]['url'],
-                    'published': get_vulnerabilities(response)[x]['cve']['published'],
-                    'lastModified': get_vulnerabilities(response)[x]['cve']['lastModified'],
+                    'cve_id': vul_cve(response, x)['id'],
+                    'url': vul_cve(response, x)['references'][y]['url'],
+                    'published': vul_cve(response, x)['published'],
+                    'lastModified': vul_cve(response, x)['lastModified'],
                     'cvss': get_cvss(response, x),
                     'patch': 'Nan'
                 }
                 # appends the dictionary to the list
-                charlist.append(char_no_tag)
+                vulnerabilities_list.append(char_no_tag)
     # returns the list of dictionaries
-    return charlist
+    return vulnerabilities_list
 
 
 # an empty list to store all the results
