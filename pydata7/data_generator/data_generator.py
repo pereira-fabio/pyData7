@@ -118,7 +118,7 @@ def get_cve_patched(response):
                     'published': vul_cve(response, x)['published'],
                     'lastModified': vul_cve(response, x)['lastModified'],
                     'cvss': get_cvss(response, x),
-                    'patch': 'Nan'
+                    'patch': 'n/a'
                 }
                 # appends the dictionary to the list
                 vulnerabilities_list.append(char_no_tag)
@@ -132,7 +132,7 @@ all_results = []
 # results per page (default at 2000/page)
 resultsPerPage = 2000
 
-# This will help to get the total results of the first page for the range
+# This will help to get the total results of the API
 data_0 = main_request(0)
 response_code = requests.get(baseurl).status_code
 
