@@ -4,9 +4,6 @@ import datetime
 import os
 from pydata7.scripts.json_file_generation import json_file_generation
 
-# # Path to the filtered data
-# save_path = "../data/"
-
 # API url
 baseurl = 'https://services.nvd.nist.gov/rest/json/cves/2.0'
 
@@ -158,24 +155,6 @@ def data_retrieval():
         raise SystemExit(err)
     print(len(all_results), "links were retrieved")
     return json_file_generation(all_results, "raw_data")
-
-
-# def json_file_generation():
-#     # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
-#     current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-#
-#     # Saves the data into a json file with the current date and time
-#     file_name = f"raw_data_{current_time}.json"
-#
-#     # Creates the path to save the json file
-#     file_path = os.path.join(save_path, file_name)
-#
-#     # Writes the data into a json file
-#     with open(file_path, "w") as json_file:
-#         json.dump(all_results, json_file)
-#
-#     # returns the path to the json file, so it can be used in the next function
-#     return file_path
 
 
 if __name__ == "__main__":

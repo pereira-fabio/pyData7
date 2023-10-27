@@ -5,9 +5,6 @@ import datetime
 from pydata7.data_generator.data_generator import data_retrieval
 from pydata7.scripts.json_file_generation import json_file_generation
 
-# # Path to the filtered data
-# save_path = "../data/"
-
 # Path to the regex patterns
 path_to_platform = "../regex/platform.json"
 
@@ -56,24 +53,6 @@ def data_filtering():
                     filtered_data.append(item)
     print(len(filtered_data), "links were filtered")
     return json_file_generation(filtered_data, "filtered_data")
-
-
-# def json_file_generation():
-#     # Gets the current date and time as a string. Year - Month - Day _ Hour - Minute - Second
-#     current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-#
-#     # Saves the data into a json file with the current date and time
-#     file_name = f"filtered_data_{current_time}.json"
-#
-#     # Creates the path to save the json file
-#     file_path = os.path.join(save_path, file_name)
-#
-#     # Write the filtered data to a json file
-#     with open(file_path, "w") as filtered_file:
-#         json.dump(filtered_data, filtered_file)
-#
-#     # returns the path to the json file, so it can be used in the next function
-#     return file_path
 
 
 if __name__ == "__main__":
