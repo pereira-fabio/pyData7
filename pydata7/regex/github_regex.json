@@ -1,0 +1,198 @@
+[{ "platform": "github",
+        "regexps": [
+            {
+                "regexp": "(?:git@|https://)github.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "commit": 4,
+                "type": "commit"
+            },{
+                "regexp": "(?:git@|https://)gist.github.com[:/]([a-zA-Z0-9-_\\.]*)/([a-zA-Z0-9]+)",
+                "user": 1,
+                "hash": 2,
+                "type": "gist"
+            },{
+                "regexp":"(?:git@|https://)github.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/pull/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "pull": 3,
+                "type": "pull"
+            },{
+                "regexp": "(?:git@|https://)github.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/issues/([0-9]+)",
+                "organisation": 1,
+                "project": 2,
+                "issue": 4,
+                "type": "issue"
+            }
+        ],
+        "rebuild": "git@github.com:$organisation/$project.git",
+        "replace": [
+            {
+                "old_organisation": "golang",
+                "old_project": "*",
+                "new_platform": "googlesource",
+                "new_organisation": "go",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "GerritCodeReview",
+                "old_project": "*",
+                "new_platform": "googlesource",
+                "new_organisation": "gerrit",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "chromium",
+                "old_project": "*",
+                "new_platform": "googlesource",
+                "new_organisation": "chromium",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "PDFium",
+                "old_project": "PDFium",
+                "new_platform": "googlesource",
+                "new_organisation": "pdfium",
+                "new_project": "pdfium"
+            },
+            {
+                "old_organisation": "google",
+                "old_project": "skia",
+                "new_platform": "googlesource",
+                "new_organisation": "skia",
+                "new_project": "skia"
+            },
+            {
+                "old_organisation": "google",
+                "old_project": "boringssl",
+                "new_platform": "googlesource",
+                "new_organisation": "boringssl",
+                "new_project": "boringssl"
+            },
+            {
+                "old_organisation": "gnutls",
+                "old_project": "gnutls",
+                "new_platform": "gitlab",
+                "new_organisation": "gnutls",
+                "new_project": "gnutls"
+            },
+            {
+                "old_organisation": "torvalds",
+                "old_project": "linux",
+                "new_platform": "kernel",
+                "new_organisation": "*",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "wireshark",
+                "old_project": "wireshark",
+                "new_platform": "gitlab",
+                "new_organisation": "wireshark",
+                "new_project": "wireshark"
+            },
+            {
+                "old_organisation": "vogel",
+                "old_project": "kadu",
+                "new_platform": "gitlab",
+                "new_organisation": "kadu",
+                "new_project": "kadu"
+            },
+            {
+                "old_organisation": "qt",
+                "old_project": "*",
+                "new_platform": "qt",
+                "new_organisation": "*",
+                "new_project": "add('qt/')"
+            },
+            {
+                "old_organisation": "GNOME",
+                "old_project": "*",
+                "new_platform": "gnome",
+                "new_organisation": "*",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "Debian",
+                "old_project": "*",
+                "new_platform": "salsa-debian",
+                "new_organisation": "debian",
+                "new_project": "*"
+            },{
+                "old_organisation":"banu",
+                "old_project":"tinyproxy",
+                "new_platform":"github",
+                "new_organisation":"tinyproxy",
+                "new_project":"tinyproxy"
+            },
+            {
+                "old_organisation":"Enalean",
+                "old_project":"tuleap",
+                "new_platform":"tuleap",
+                "new_organisation":"tuleap",
+                "new_project":"tuleap/stable"
+            },
+            {
+                "old_organisation":"wine-mirror",
+                "old_project":"wine",
+                "new_platform":"wine",
+                "new_organisation":"winehq",
+                "new_project":"wine"
+            },{
+                "old_organisation":"isc-projects",
+                "old_project":"*",
+                "new_platform":"isc",
+                "new_organisation":"isc-projects",
+                "new_project":"*"
+            },{
+                "old_organisation":"mirror",
+                "old_project":"tinycc",
+                "new_platform":"or-cz",
+                "new_organisation":"or-cz",
+                "new_project":"*"
+            },{
+                "old_organisation":"letolabs",
+                "old_project":"nasm",
+                "new_platform":"or-cz",
+                "new_organisation":"or-cz",
+                "new_project":"*"
+            },            {
+                "old_organisation": "libvirt",
+                "old_project": "*",
+                "new_platform": "gitlab",
+                "new_organisation": "libvirt",
+                "new_project": "*"
+            },
+            {
+                "old_organisation": "gentoo",
+                "old_project": "*",
+                "new_platform": "gentoo",
+                "new_organisation": "gentoo",
+                "new_project": "*"
+            },{
+                "old_organisation": "BIRD",
+                "old_project": "*",
+                "new_platform": "niz-cz",
+                "new_organisation": "labs",
+                "new_project": "*"
+            },{
+                "old_organisation": "videolan",
+                "old_project": "*",
+                "new_platform": "videolan",
+                "new_organisation": "*",
+                "new_project": "*"
+            },{
+                "old_organisation": "github",
+                "old_project": "putty",
+                "new_platform": "tartarus",
+                "new_organisation": "simon",
+                "new_project": "*"
+            },{
+                "old_organisation": "spip",
+                "old_project": "SPIP",
+                "new_platform": "spip",
+                "new_organisation": "*",
+                "new_project": "spip"
+            }
+        ]
+    }
+]
