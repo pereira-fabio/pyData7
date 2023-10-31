@@ -6,10 +6,12 @@ from pydata7.data_generator.data_generator import data_retrieval
 from pydata7.scripts.json_file_generation import json_file_generation
 
 # Path to the regex patterns
-path_to_platform = "../regex/platform.json"
+# path_to_platform = "../regex/platform.json"
+# Only for the github links
+path_to_platform = "../regex/github_regex.json"
 
 # Path to the data from the data_generator
-path_to_json = data_retrieval() #"../data/data_2023-10-03_13-52-43.json"
+path_to_json = data_retrieval()
 
 # Load the regex patterns from platform.json (regex)
 with open(path_to_platform, "r") as regex_file:
@@ -34,7 +36,6 @@ def get_unique_cve_id(path_to_json):
 
 
 def data_filtering():
-
     # Iterate through the regex patterns
     for regex in regex_data:
         # A list to store the complied regex
