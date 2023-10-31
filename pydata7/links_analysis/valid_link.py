@@ -4,15 +4,12 @@ import requests
 import json
 import os
 import datetime
-from pydata7.links_analysis.link_filter import data_filtering
+#from pydata7.links_analysis.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
-
-# # Path to the filtered data
-# save_path = "../data/"
-
 # Path to the data from the data_generator
-path_to_json = data_filtering()
+#path_to_json = data_filtering()
+path_to_json = "../data/filtered_data_2023-10-31_14-38-50.json"
 
 # A list to store the data that contains a commit
 contains_commit = []
@@ -40,35 +37,52 @@ def has_commit():
     return json_file_generation(contains_commit, "contains_commit")
 
 
-def is_valid():
+def get_github_projects():
     temp = []
-    valid_links = []
+
     with open(has_commit(), "r") as f:
         valid_commit_links = json.load(f)
 
-    # with open("../data/contains_commit_2023-10-25_15-00-34.json", "r") as f:
-    #     valid_commit_links = json.load(f)
-
     for item in valid_commit_links:
         parts = item["url"].split("/")
-        print(parts)
         repository = "https://" + parts[2] + "/" + parts[3] + "/" + parts[4]
         # If temp is empty, add the first repository
         if temp == []:
             temp.append(repository)
-            print(len(temp))
         # If the repository is not in temp, add it and check if the link is valid
         if repository not in temp:
             temp.append(repository)
-            # try:
-            #     response = requests.head(repository)
-            #     if response.status_code == 200:
-            #         valid_links.append(item)
-            #         print(len(valid_links))
-            # except requests.exceptions.RequestException as err:
-            #     raise SystemExit(err)
+
+    print(len(temp), "repositories were found")
     return json_file_generation(temp, "temp")
 
 
+# Async function to check the links much faster
+async def is_valid():
+    valid_link = []
+    # Create a session
+    async with aiohttp.ClientSession() as session:
+        # Get the GitHub projects link
+        with open(get_github_projects(), "r") as f:
+            github_projects = json.load(f)
+
+        # Async function to check the links
+        async def check_url(url):
+            try:
+                # Send a request to the url
+                async with session.head(url) as response:
+                    # Check if the response is 200
+                    if response.status == 200:
+                        # Add the link to the list
+                        valid_link.append(url)
+            # Print the error if there is any
+            except Exception as e:
+                print(f"Error:{url}, {e}")
+        # Run the async function
+        await asyncio.gather(*[check_url(url) for url in github_projects])
+
+    return json_file_generation(valid_link, "valid_link")
+
+
 if __name__ == "__main__":
-    is_valid()
+    asyncio.run(is_valid())
