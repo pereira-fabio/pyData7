@@ -4,25 +4,28 @@ import requests
 import json
 import os
 import datetime
-#from pydata7.links_analysis.link_filter import data_filtering
+from pydata7.links_analysis.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
 # Path to the data from the data_generator
-#path_to_json = data_filtering()
-path_to_json = "../data/filtered_data_2023-10-31_14-38-50.json"
+path_to_json = data_filtering()
+
+# For testing purposes
+# path_to_json = "../data/filtered_data_2023-10-31_14-38-50.json"
 
 # A list to store the data that contains a commit
 contains_commit = []
 contains_issues = []
 
-with open(path_to_json, "r") as f:
-    data = json.load(f)
+with open(path_to_json, "r") as file:
+    data = json.load(file)
 
 
 def has_commit():
     for item in data:
         if "commit" in item["url"]:
             # Get the organization and project name from the url
+            # For GitHub links only
             organization_project = item["url"].split("/")[3:5]
             # Add the organization and project name to the dictionary
             item["organization_project"] = organization_project
