@@ -1,9 +1,6 @@
 import asyncio
 import aiohttp
-import requests
 import json
-import os
-import datetime
 from pydata7.links_analysis.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
@@ -61,8 +58,11 @@ def get_github_projects():
 
 
 # Async function to check the links much faster
-async def is_valid():
-    valid_link = []
+# This function will return a list of links that are not valid
+# There should more valid links than not valid links
+# Will be easier to filter bad links out the database
+async def is_not_valid():
+    not_valid_link = []
     # Create a session
     async with aiohttp.ClientSession() as session:
         # Get the GitHub projects link
@@ -75,16 +75,16 @@ async def is_valid():
                 # Send a request to the url
                 async with session.head(url) as response:
                     # Check if the response is 200
-                    if response.status == 200:
+                    if response.status != 200:
                         # Add the link to the list
-                        valid_link.append(url)
+                        not_valid_link.append(url)
             # Print the error if there is any
             except Exception as e:
                 print(f"Error:{url}, {e}")
         # Run the async function
         await asyncio.gather(*[check_url(url) for url in github_projects])
 
-    return json_file_generation(valid_link, "valid_link")
+    return json_file_generation(not_valid_link, "not_valid_link")
 
 
 if __name__ == "__main__":
