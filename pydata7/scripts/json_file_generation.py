@@ -2,7 +2,7 @@ import datetime
 import json
 import os
 
-save_path = "../data/"
+save_path = "../data/json_files/"
 
 
 def json_file_generation(array, name):

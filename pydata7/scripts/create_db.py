@@ -6,7 +6,7 @@ import os
 myclient = MongoClient("mongodb://localhost:27017/")
 mydb = myclient["pydata7"]  # database name
 
-path_to_data = "../data/"
+path_to_data = "../data/jason_files/"
 
 
 # Imports data into the database by going through the data folder
