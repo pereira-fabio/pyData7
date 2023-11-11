@@ -3,54 +3,60 @@
 # python3 repo_downloader.py
 import os
 import git
-from git import Repo
-from dotenv import load_dotenv
+import json
 import datetime
+from git import Repo
+#from pydata7.links_analysis.valid_link import has_commit
+from json_file_generation import json_file_generation
 
-print(load_dotenv())
-path_to_data = os.getenv("PATH_TO_DATA")
-repo_url = "https://github.com/pereira-fabio/pyData7"
-#repo_url = "https://github.com/KDE/kde1-kdebase"
-commit_sha = "1705798b994f3fdda1754876a14a42121c183c37"
-#commit_sha = "04906bd5de2f220bf100b605dad37b4a1d9a91a6"
+# path_to_json = has_commit()
+path_to_json = "../data/json_files/test.json"
+
+commit_info_list = []
+commit_content = []
+
+with open(path_to_json, "r") as file:
+    data = json.load(file)
 
 
-# Clones the repository
-path_repo = "../data/repos/"
-path_repo_url = path_repo + repo_url
+# Do not know how to call the function
+def foo():
+    for item in data:
+        repo_url = item["repository"]
+        commit_sha = item["commit_sha"]
+        parts = item["url"].split("/")
+        repository = parts[3] + "/" + parts[4]
+        path = "../data/repos/"
+        path_repo = path + repository
 
-if os.path.exists(path_repo_url):
-    repo = git.Repo(path_repo_url)
-else:
-    repo = git.Repo.clone_from(repo_url, path_repo_url)
+        if os.path.exists(path_repo):
+            repo = git.Repo(path_repo)
+            print("Repository already exists")
+        else:
+            repo = git.Repo.clone_from(repo_url, path_repo)
+        print("Repository was cloned")
 
-commit = repo.commit(commit_sha)
+        # Get the commit before the specified commit
+        commit_sha2 = commit_sha + "~1"
 
-# destination = "../data/commit"
-# os.makedirs(destination, exist_ok=True)
-#
-# for item in commit.tree.traverse():
-#     if item.type == "blob":
-#         path = os.path.join(path_repo, item.path)
-#         destination_path = os.path.join(destination, item.path)
-#
-#         os.makedirs(os.path.dirname(destination_path), exist_ok=True)
-#         with open(destination_path, "wb") as f:
-#             with open(path, "rb") as original:
-#                 f.write(original.read())
+        # Get the commit objects for the specified SHAs
+        commit1 = repo.commit(commit_sha)
+        commit2 = repo.commit(commit_sha2)
 
-# print(f"Commit content from {commit_sha} is saved in {destination}")
+        # Display the diff between the two commits
+        commit_info = {
+            "commit_author": str(commit1.author),
+            "commit_date": str(datetime.datetime.fromtimestamp(commit1.authored_date)),
+            "commit_message": str(commit1.message),
+            "commit_diff": repo.git.diff(commit1, commit2)
+        }
+        commit_info_list.append(commit_info)
 
-# Define the commit SHAs for comparison
-commit_sha1 = commit_sha + "~1"
+        item["commit_info"] = commit_info_list
+        commit_content.append(item)
 
-# Get the commit objects for the specified SHAs
-commit1 = repo.commit(commit_sha)
-commit2 = repo.commit(commit_sha1)
+    json_file_generation(commit_content, "commit_info")
 
-# Display the diff between the two commits
-print(repo.git.diff(commit1, commit2))
 
-print("author: ", commit1.author)
-print("date: ", datetime.datetime.fromtimestamp(commit1.authored_date))
-print("message: ", commit1.message)
+if __name__ == "__main__":
+    foo()
