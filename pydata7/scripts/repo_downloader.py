@@ -5,28 +5,15 @@ import os
 import git
 from git import Repo
 from dotenv import load_dotenv
+import datetime
 
 print(load_dotenv())
 path_to_data = os.getenv("PATH_TO_DATA")
 repo_url = "https://github.com/pereira-fabio/pyData7"
 commit_sha = "1705798b994f3fdda1754876a14a42121c183c37"
-# def retrieving_file_from_specific_commit(repo: Repo, commit: str, path: str) -> str:
-#     """
-#     Function to return a file from a specific commit
-#
-#     Parameters:
-#         repo (Repo): repository object
-#         commit (str): commit string
-#         path (str): path of the file to load
-#
-#     Returns:
-#         the content of the file (str)
-#     """
-#     return repo.git.show("{}:{}".format(commit, path))
-#
 
 # Clones the repository
-path_repo= "../data/repos"
+path_repo = "../data/repos"
 
 if os.path.exists(path_repo):
     repo = git.Repo(path_repo)
@@ -60,3 +47,7 @@ commit2 = repo.commit(commit_sha2)
 
 # Display the diff between the two commits
 print(repo.git.diff(commit1, commit2))
+
+print("author: ", commit1.author)
+print("date: ", datetime.datetime.fromtimestamp(commit1.authored_date))
+print("message: ", commit1.message)
