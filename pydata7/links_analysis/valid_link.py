@@ -1,14 +1,14 @@
 import asyncio
 import aiohttp
 import json
-from pydata7.links_analysis.link_filter import data_filtering
+# from pydata7.links_analysis.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
 # Path to the data from the data_generator
-path_to_json = data_filtering()
+# path_to_json = data_filtering()
 
 # For testing purposes
-# path_to_json = "../data/filtered_data_2023-10-31_14-38-50.json"
+path_to_json = "../data/json_files/filtered_data_2023-11-08_17-06-14.json"
 
 # A list to store the data that contains a commit
 contains_commit = []
@@ -16,6 +16,8 @@ contains_issues = []
 
 with open(path_to_json, "r") as file:
     data = json.load(file)
+
+test = []
 
 
 def has_commit():
@@ -60,8 +62,8 @@ def has_commit():
 
 
 # Async function to check the links much faster
-valid_link = []
-not_valid_link = []
+# valid_link = []
+# not_valid_link = []
 
 
 # async def is_valid():
@@ -93,10 +95,16 @@ not_valid_link = []
 #         await asyncio.gather(*[check_url(url) for url in github_projects])
 #
 #     return json_file_generation(valid_link, "valid_link")
+def sorted_data():
+    with open(has_commit(), "r") as f:
+        d = json.load(f)
+
+    sorted_data = sorted(d, key=lambda k: k['repository'])
+    return json_file_generation(sorted_data, "sorted_commit")
 
 
 if __name__ == "__main__":
-    has_commit()
+    sorted_data()
     # asyncio.run(is_valid())
     # print(len(valid_link), "valid links were found")
     # print(len(not_valid_link), "not valid links were found")
