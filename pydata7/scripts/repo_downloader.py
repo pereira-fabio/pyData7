@@ -6,7 +6,7 @@ import git
 import json
 import datetime
 from git import Repo
-#from pydata7.links_analysis.valid_link import has_commit
+#from pydata7.links_processing.valid_link import has_commit
 from json_file_generation import json_file_generation
 
 # path_to_json = has_commit()

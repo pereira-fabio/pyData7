@@ -1,7 +1,7 @@
 import asyncio
 import aiohttp
 import json
-# from pydata7.links_analysis.link_filter import data_filtering
+# from pydata7.links_processing.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
 # Path to the data from the data_generator
