@@ -18,7 +18,7 @@ path_to_json = "../data/json_files/sorted_commit_2023-11-11_15-41-43.json"
 commit_info_list = []
 # A list that stores everything of the commit information
 commit_content = []
-
+#hello
 with open(path_to_json, "r") as file:
     data = json.load(file)
 
