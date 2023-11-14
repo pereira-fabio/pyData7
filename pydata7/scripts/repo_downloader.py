@@ -14,11 +14,9 @@ from json_file_generation import json_file_generation
 #path_to_json = "../data/json_files/test_2023-11-11_15-27-47.json"
 path_to_json = "../data/json_files/sorted_commit_2023-11-11_15-41-43.json"
 
-# A list to store the commit information
-commit_info_list = []
 # A list that stores everything of the commit information
 commit_content = []
-#hello
+
 with open(path_to_json, "r") as file:
     data = json.load(file)
 
@@ -40,14 +38,14 @@ def foo():
 
         if current_repo_url == next_repo_url:
             print("Same repository")
-            commit_handler(path_repo, current_repo_url, commit_sha)
-            data[i]["commit_info"] = commit_info_list
+
+            data[i]["commit_info"] = commit_handler(path_repo, current_repo_url, commit_sha)
             commit_content.append(data[i])
             print("Same repository")
         else:
             print("Different repository")
-            commit_handler(path_repo, current_repo_url, commit_sha)
-            data[i]["commit_info"] = commit_info_list
+
+            data[i]["commit_info"] = commit_handler(path_repo, current_repo_url, commit_sha)
             commit_content.append(data[i])
             shutil.rmtree(path_repo)
             print("Different repository")
@@ -97,6 +95,8 @@ def foo():
 
 
 def commit_handler(path_repo, repo_url, commit_sha):
+    # A list to store the commit information
+    commit_info_list = []
     # Clones the repository if it does not exist
     if os.path.exists(path_repo):
         repo = git.Repo(path_repo)
@@ -121,7 +121,7 @@ def commit_handler(path_repo, repo_url, commit_sha):
         "commit_diff": repo.git.diff(commit1, commit2)
     }
     commit_info_list.append(commit_info)
-
+    return commit_info_list
 
 if __name__ == "__main__":
     foo()
