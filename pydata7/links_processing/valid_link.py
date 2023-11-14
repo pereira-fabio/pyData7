@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 import json
+import re
 # from pydata7.links_processing.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
@@ -27,11 +28,13 @@ def has_commit():
             # For GitHub links only
             parts = item["url"].split("/")
             repository = "https://" + parts[2] + "/" + parts[3] + "/" + parts[4]
-            # Add the organization and project name to the dictionary
-            item["repository"] = repository
-            item["commit_sha"] = parts[6]
-            # Add the dictionary to the list
-            contains_commit.append(item)
+            commit_sha = parts[6]
+            if is_alphanumeric(commit_sha):
+                # Add the organization and project name to the dictionary
+                item["repository"] = repository
+                item["commit_sha"] = commit_sha
+                # Add the dictionary to the list
+                contains_commit.append(item)
         elif "issues" in item["url"]:
             # Add the dictionary to the list
             contains_issues.append(item)
@@ -39,6 +42,11 @@ def has_commit():
     json_file_generation(contains_issues, "contains_issues")
     # This is the main function that will be used
     return json_file_generation(contains_commit, "contains_commit")
+
+
+def is_alphanumeric(commit_sha):
+    regex_pattern = r"^[a-zA-Z0-9]+$"
+    return re.match(regex_pattern, commit_sha) is not None
 
 
 # def get_github_projects():
