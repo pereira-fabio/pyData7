@@ -5,12 +5,14 @@ import os
 import git
 import json
 import datetime
+import shutil
 from git import Repo
-#from pydata7.links_processing.valid_link import has_commit
+# from pydata7.links_processing.valid_link import has_commit
 from json_file_generation import json_file_generation
 
 # path_to_json = has_commit()
-path_to_json = "../data/json_files/test.json"
+#path_to_json = "../data/json_files/test_2023-11-11_15-27-47.json"
+path_to_json = "../data/json_files/sorted_commit_2023-11-11_15-41-43.json"
 
 # A list to store the commit information
 commit_info_list = []
@@ -23,48 +25,102 @@ with open(path_to_json, "r") as file:
 
 # Do not know how to call the function
 def foo():
-    for item in data:
-        repo_url = item["repository"]
-        commit_sha = item["commit_sha"]
+    print(range(len(data) - 1))
+    for i in range(7 - 1):
+        print(i)
+        current_repo_url = data[i]["repository"]
+        next_repo_url = data[i + 1]["repository"]
 
-        parts = item["url"].split("/")
+        commit_sha = data[i]["commit_sha"]
+
+        parts = data[i]["url"].split("/")
         repository = parts[3] + "/" + parts[4]
         path = "../data/repos/"
-        # Sets the path to the repository using the organization and project name
         path_repo = path + repository
 
-        # Clones the repository if it does not exist
-        if os.path.exists(path_repo):
-            repo = git.Repo(path_repo)
-            print("Repository already exists")
+        if current_repo_url == next_repo_url:
+            print("Same repository")
+            commit_handler(path_repo, current_repo_url, commit_sha)
+            data[i]["commit_info"] = commit_info_list
+            commit_content.append(data[i])
+            print("Same repository")
         else:
-            repo = git.Repo.clone_from(repo_url, path_repo)
-        print("Repository was cloned")
+            print("Different repository")
+            commit_handler(path_repo, current_repo_url, commit_sha)
+            data[i]["commit_info"] = commit_info_list
+            commit_content.append(data[i])
+            shutil.rmtree(path_repo)
+            print("Different repository")
 
-        # Get the commit before the specified commit
-        commit_sha2 = commit_sha + "~1"
-
-        # Get the commit objects for the specified SHAs
-        commit1 = repo.commit(commit_sha)
-        commit2 = repo.commit(commit_sha2)
-
-        # Get the commit information and add it to the list
-        commit_info = {
-            # str() is used to convert the object to string -> otherwise it will cause an error with JSON
-            "commit_author": str(commit1.author),
-            # Convert the timestamp to a readable date format
-            "commit_date": str(datetime.datetime.fromtimestamp(commit1.authored_date)),
-            "commit_message": str(commit1.message),
-            "commit_diff": repo.git.diff(commit1, commit2)
-        }
-        commit_info_list.append(commit_info)
-
-        # Add the commit information to the dictionary
-        item["commit_info"] = commit_info_list
-        # Add the dictionary to the list
-        commit_content.append(item)
+    # for item in data:
+    #     repo_url = item["repository"]
+    #     commit_sha = item["commit_sha"]
+    #
+    #     parts = item["url"].split("/")
+    #     repository = parts[3] + "/" + parts[4]
+    #     path = "../data/repos/"
+    #     # Sets the path to the repository using the organization and project name
+    #     path_repo = path + repository
+    #
+    #     # Clones the repository if it does not exist
+    #     if os.path.exists(path_repo):
+    #         repo = git.Repo(path_repo)
+    #         print("Repository already exists")
+    #     else:
+    #         repo = git.Repo.clone_from(repo_url, path_repo)
+    #     print("Repository was cloned")
+    #
+    #     # Get the commit before the specified commit
+    #     commit_sha2 = commit_sha + "~1"
+    #
+    #     # Get the commit objects for the specified SHAs
+    #     commit1 = repo.commit(commit_sha)
+    #     commit2 = repo.commit(commit_sha2)
+    #
+    #     # Get the commit information and add it to the list
+    #     commit_info = {
+    #         # str() is used to convert the object to string -> otherwise it will cause an error with JSON
+    #         "commit_author": str(commit1.author),
+    #         # Convert the timestamp to a readable date format
+    #         "commit_date": str(datetime.datetime.fromtimestamp(commit1.authored_date)),
+    #         "commit_message": str(commit1.message),
+    #         "commit_diff": repo.git.diff(commit1, commit2)
+    #     }
+    #     commit_info_list.append(commit_info)
+    #
+    #     # Add the commit information to the dictionary
+    #     item["commit_info"] = commit_info_list
+    #     # Add the dictionary to the list
+    #     commit_content.append(item)
 
     json_file_generation(commit_content, "commit_info")
+
+
+def commit_handler(path_repo, repo_url, commit_sha):
+    # Clones the repository if it does not exist
+    if os.path.exists(path_repo):
+        repo = git.Repo(path_repo)
+        print("Repository already exists")
+    else:
+        repo = git.Repo.clone_from(repo_url, path_repo)
+    print("Repository was cloned")
+    # Get the commit before the specified commit
+    commit_sha2 = commit_sha + "~1"
+
+    # Get the commit objects for the specified SHAs
+    commit1 = repo.commit(commit_sha)
+    commit2 = repo.commit(commit_sha2)
+
+    # Get the commit information and add it to the list
+    commit_info = {
+        # str() is used to convert the object to string -> otherwise it will cause an error with JSON
+        "commit_author": str(commit1.author),
+        # Convert the timestamp to a readable date format
+        "commit_date": str(datetime.datetime.fromtimestamp(commit1.authored_date)),
+        "commit_message": str(commit1.message),
+        "commit_diff": repo.git.diff(commit1, commit2)
+    }
+    commit_info_list.append(commit_info)
 
 
 if __name__ == "__main__":
