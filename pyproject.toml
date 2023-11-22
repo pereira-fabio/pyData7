@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pydata7"
+version = "0.1.0"
+description = ""
+authors = ["Pereira Fabio <fabio.pereira.002@student.uni.lu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pymongo = "^4.3.3"
+fastapi = "^0.104.1"
+requests = "^2.31.0"
+gitpython = "^3.1.40"
+aiohttp = "^3.9.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
