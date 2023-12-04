@@ -8,7 +8,7 @@ from pydata7.scripts.json_file_generation import json_file_generation
 # Path to the regex patterns
 # path_to_platform = "../regex/platform.json"
 # Only for the github links
-path_to_platform = "../regex/github_regex.json"
+path_to_platform = "pydata7/regex/github_regex.json"
 
 # Path to the data from the data_generator
 path_to_json = data_retrieval()
