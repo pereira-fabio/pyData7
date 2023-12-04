@@ -26,13 +26,13 @@ filtered_data = []
 
 
 # This function will return a list of dictionaries with the CVE ID (might contain duplicates)
-def get_unique_cve_id(path_to_json):
-    with open(path_to_json, "r+") as json_file:
-        data = json.load(json_file)
-        cveid_list = []
-        for item in data:
-            cveid_list.append(item['cve_id'])
-        return list(set(cveid_list))
+# def get_unique_cve_id(path_to_json):
+#     with open(path_to_json, "r+") as json_file:
+#         data = json.load(json_file)
+#         cveid_list = []
+#         for item in data:
+#             cveid_list.append(item['cve_id'])
+#         return list(set(cveid_list))
 
 
 def data_filtering():
