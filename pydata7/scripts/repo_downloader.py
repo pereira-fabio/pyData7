@@ -38,7 +38,7 @@ def foo():
         # To create a path to the repository while cloning
         parts = data[i]["url"].split("/")
         repository = parts[3] + "/" + parts[4]
-        path = "../data/repos/"
+        path = "pydata7/data/repos/"
         path_repo = path + repository
 
         # Check if the current and next repository url are the same
