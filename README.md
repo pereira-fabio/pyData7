@@ -23,3 +23,9 @@ After that you need to install the packages to do use the following command:``po
 Now that all packages are install, you can use the environment poetry provides to do so use ``poetry shell``.
 
 After all that you can now run ``python run.py`` 
+
+## MongoDB Compass
+If you are using MongoDB Compass, I used the `root` and `example` for the login credentials of the database.
+I would recommend changing it later on if needed. The database_manager and fastapi folders should contain files with 
+those credential if changement is required. I would even say to use a `doevn` file to store does values. 
+Note that in the docker compose file the same credentials where used. 
