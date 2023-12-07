@@ -36,6 +36,7 @@ def import_data():
                 collection = mydb["".join(collection_name)]
                 insert_data(path_to_data + filename, collection)
                 print(collection_name, "was inserted into the database")
+    myclient.close()
 
 
 # Inserting data into the database
