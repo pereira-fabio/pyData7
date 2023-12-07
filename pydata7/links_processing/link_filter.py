@@ -8,7 +8,7 @@ from pydata7.scripts.json_file_generation import json_file_generation
 # Path to the regex patterns
 # path_to_platform = "../regex/platform.json"
 # Only for the github links
-path_to_platform = "../regex/github_regex.json"
+path_to_platform = "pydata7/regex/github_regex.json"
 
 # Path to the data from the data_generator
 path_to_json = data_retrieval()
@@ -26,13 +26,13 @@ filtered_data = []
 
 
 # This function will return a list of dictionaries with the CVE ID (might contain duplicates)
-def get_unique_cve_id(path_to_json):
-    with open(path_to_json, "r+") as json_file:
-        data = json.load(json_file)
-        cveid_list = []
-        for item in data:
-            cveid_list.append(item['cve_id'])
-        return list(set(cveid_list))
+# def get_unique_cve_id(path_to_json):
+#     with open(path_to_json, "r+") as json_file:
+#         data = json.load(json_file)
+#         cveid_list = []
+#         for item in data:
+#             cveid_list.append(item['cve_id'])
+#         return list(set(cveid_list))
 
 
 def data_filtering():

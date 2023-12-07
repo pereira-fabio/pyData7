@@ -13,7 +13,7 @@ from pydata7.database_manager.connect_to_db import import_data
 
 # path_to_json = sorted_data()
 # path_to_json = "../data/json_files/test_2023-11-11_15-27-47.json"
-path_to_json = "../data/json_files/sorted_commit_2023-11-14_16-55-57.json"
+path_to_json = "pydata7/data/json_files/test_2023-11-11_15-27-47.json"
 
 # A list that stores everything of the commit information
 commit_content = []
@@ -25,7 +25,7 @@ with open(path_to_json, "r") as file:
 # Do not know how to call the function
 def foo():
     print(range(len(data) - 1))
-    for i in range(10 - 1):
+    for i in range(len(data) - 1):
         print(i)
         # Get the current and next repository url
         current_repo_url = data[i]["repository"]
@@ -38,7 +38,7 @@ def foo():
         # To create a path to the repository while cloning
         parts = data[i]["url"].split("/")
         repository = parts[3] + "/" + parts[4]
-        path = "../data/repos/"
+        path = "pydata7/data/repos/"
         path_repo = path + repository
 
         # Check if the current and next repository url are the same

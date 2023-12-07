@@ -7,7 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-
+pymongo = "^4.3.3"
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0"
+requests = "^2.31.0"
+gitpython = "^3.1.40"
+aiohttp = "^3.9.0"
+docker = "^24.0.5"
 
 [build-system]
 requires = ["poetry-core"]

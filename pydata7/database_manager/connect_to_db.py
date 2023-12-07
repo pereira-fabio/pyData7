@@ -5,13 +5,13 @@ import os
 # Connecting to the database
 hostname = "localhost"
 port = 27017
-user="root"
-password="example"
+user = "root"
+password = "example"
 myclient = MongoClient(hostname, port, username=user, password=password)
 # myclient = MongoClient("mongodb://localhost:27017/")
 mydb = myclient["pydata7"]  # database name
 
-path_to_data = "../data/json_files/"
+path_to_data = "pydata7/data/json_files/"
 
 
 # Imports data into the database by going through the data folder
@@ -36,6 +36,7 @@ def import_data():
                 collection = mydb["".join(collection_name)]
                 insert_data(path_to_data + filename, collection)
                 print(collection_name, "was inserted into the database")
+    myclient.close()
 
 
 # Inserting data into the database

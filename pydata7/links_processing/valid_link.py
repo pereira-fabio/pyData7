@@ -2,14 +2,14 @@ import asyncio
 import aiohttp
 import json
 import re
-# from pydata7.links_processing.link_filter import data_filtering
+from pydata7.links_processing.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
 # Path to the data from the data_generator
-# path_to_json = data_filtering()
+path_to_json = data_filtering()
 
 # For testing purposes
-path_to_json = "../data/json_files/filtered_data_2023-11-08_17-06-14.json"
+# path_to_json = "../data/json_files/filtered_data_2023-11-08_17-06-14.json"
 
 # A list to store the data that contains a commit
 contains_commit = []
