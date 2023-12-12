@@ -1,18 +1,11 @@
-from pymongo import MongoClient
+from pydata7.database_manager.connect_to_db import get_db
 from fastapi import FastAPI, HTTPException, Depends
-
-# Connecting to the database
-hostname = "localhost"
-port = 27017
-user = "root"
-password = "example"
-connection = MongoClient(hostname, port, username=user, password=password)
 
 app = FastAPI()
 
 
 def get_database():
-    db = connection["pydata7"]
+    db = get_db()
     return db
 
 

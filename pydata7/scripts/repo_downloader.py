@@ -9,7 +9,7 @@ import datetime
 import shutil
 # from pydata7.links_processing.valid_link import sorted_data
 from pydata7.scripts.json_file_generation import json_file_generation
-from pydata7.database_manager.connect_to_db import import_data
+from pydata7.database_manager.import_data import import_data
 
 # path_to_json = sorted_data()
 # path_to_json = "../data/json_files/test_2023-11-11_15-27-47.json"
