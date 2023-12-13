@@ -75,8 +75,12 @@ def read_item(cve_id: str, db=Depends(get_diff_collection)):
         raise HTTPException(status_code=404, detail="CVE not found.")
 
 
-if __name__ == "__main__":
+def run_uvicorn():
     # server which fastapi runs on and can be connected to
     import uvicorn
 
     uvicorn.run(app, host="localhost", port=8000)
+
+
+if __name__ == "__main__":
+    run_uvicorn()
