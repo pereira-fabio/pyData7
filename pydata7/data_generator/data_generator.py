@@ -1,7 +1,4 @@
 import requests
-import json
-import datetime
-import os
 from pydata7.scripts.json_file_generation import json_file_generation
 
 # API url
