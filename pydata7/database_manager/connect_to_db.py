@@ -1,49 +1,29 @@
 from pymongo import MongoClient
+from dotenv import load_dotenv
 import os
+load_dotenv()
 
 # I can only connect to a database which is not running on docker container
 # Connecting to the database
-hostname = "localhost"
-port = 27017
-user = "root"
-password = "example"
-myclient = MongoClient(hostname, port, username=user, password=password)
-# myclient = MongoClient("mongodb://localhost:27017/")
-mydb = myclient["pydata7"]  # database name
-
-path_to_data = "pydata7/data/json_files/"
+hostname = os.getenv("HOST_NAME")
+port = os.getenv("PORT")
+user = os.getenv("USER_MONGO")
+password = os.getenv("PASSWORD_MONGO")
+client = MongoClient(hostname, port, username=user, password=password)
+# client = MongoClient("mongodb://localhost:27017/")
+mydb = client["pydata7"]  # database name
 
 
-# Imports data into the database by going through the data folder
-# Since any data might be needed in the future, it makes sense to import all the data
-def import_data():
-    # Dropping collections if they exist (might remove it, since we want to update the data and not drop it)
-    if len(mydb.list_collection_names()) != 0:
-        print("The database is not empty")
-        myclient.drop_database("pydata7")
-        print("The database was dropped")
-    # Checking if the database is empty (the condition might change as well)
-    if len(mydb.list_collection_names()) == 0:
-        print("The database is empty")
-        # Creating collections
-        for filename in os.listdir(path_to_data):
-            if filename.endswith(".json"):
-                # Splits the name of the file and gets the first two parts
-                parts = filename.split("_")[0:2]
-                # Joins the first two parts and creates a collection name
-                collection_name = parts[0] + "_" + parts[1]
-                # Creates a collection
-                collection = mydb["".join(collection_name)]
-                insert_data(path_to_data + filename, collection)
-                print(collection_name, "was inserted into the database")
-    myclient.close()
+def connection():
+    if client.server_info():
+        print("Connection established:", client.address)
+    else:
+        print("Connection not established:", client.address)
 
 
-# Inserting data into the database
-def insert_data(path_to_filedata, collection):
-    with open(path_to_filedata, "r") as f:
-        collection.insert_many(eval(f.read()))
+def get_db():
+    return mydb
 
 
-if __name__ == "__main__":
-    import_data()
+def get_client():
+    return client

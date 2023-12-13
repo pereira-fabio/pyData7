@@ -1,7 +1,5 @@
 import json
 import re
-import os
-import datetime
 from pydata7.data_generator.data_generator import data_retrieval
 from pydata7.scripts.json_file_generation import json_file_generation
 
@@ -23,16 +21,6 @@ with open(path_to_json, "r") as data_file:
 
 # A Dictionary to store the filtered data
 filtered_data = []
-
-
-# This function will return a list of dictionaries with the CVE ID (might contain duplicates)
-# def get_unique_cve_id(path_to_json):
-#     with open(path_to_json, "r+") as json_file:
-#         data = json.load(json_file)
-#         cveid_list = []
-#         for item in data:
-#             cveid_list.append(item['cve_id'])
-#         return list(set(cveid_list))
 
 
 def data_filtering():
