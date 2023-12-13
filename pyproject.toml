@@ -14,6 +14,7 @@ requests = "^2.31.0"
 gitpython = "^3.1.40"
 aiohttp = "^3.9.0"
 docker = "^24.0.5"
+dotenv = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
