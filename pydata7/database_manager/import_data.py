@@ -1,4 +1,4 @@
-from pydata7.database_manager.connect_to_db import get_db, get_client
+from pydata7.database_manager.connect_to_db import get_db, get_client, connection, close_connection
 import os
 
 path_to_data = "pydata7/data/json_files/"
@@ -7,6 +7,8 @@ path_to_data = "pydata7/data/json_files/"
 # Imports data into the database by going through the data folder
 # Since any data might be needed in the future, it makes sense to import all the data
 def import_data():
+    # Establish mongo connection
+    connection()
     # Dropping collections if they exist (might remove it, since we want to update the data and not drop it)
     if len(get_db().list_collection_names()) != 0:
         print("The database is not empty")
