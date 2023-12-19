@@ -1,4 +1,4 @@
-from pydata7.database_manager.connect_to_db import get_db
+from pydata7.database_manager.connect_to_db import get_db, get_client, connection, close_connection
 from fastapi import FastAPI, HTTPException, Depends
 
 app = FastAPI()

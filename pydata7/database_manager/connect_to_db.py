@@ -1,9 +1,10 @@
+import pymongo.errors
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
-# I can only connect to a database which is not running on docker container
 # Connecting to the database
 hostname = os.getenv("HOST_NAME")
 port = os.getenv("PORT")
@@ -18,7 +19,7 @@ def connection():
     if client.server_info():
         print("Connection established:", client.address)
     else:
-        print("Connection not established:", client.address)
+        print("Connection not established.")
 
 
 def get_db():
@@ -27,3 +28,11 @@ def get_db():
 
 def get_client():
     return client
+
+
+def close_connection():
+    client.close()
+    try:
+        client.server_info()
+    except pymongo.errors.InvalidOperation:
+        print("Connection closed.")
