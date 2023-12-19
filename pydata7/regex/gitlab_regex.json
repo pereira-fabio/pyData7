@@ -1,0 +1,30 @@
+[
+  {
+    "platform": "gitlab",
+    "regexps": [
+      {
+        "regexp": "(?:git@|https://)gitlab.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)/commit/([a-zA-Z0-9]+)",
+        "organisation": 1,
+        "project": 2,
+        "commit": 4,
+        "type": "commit"
+      },
+      {
+        "regexp": "(?:git@|https://)gitlab.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)/merge_requests/([0-9]+)",
+        "organisation": 1,
+        "project": 2,
+        "pull": 3,
+        "type": "pull"
+      },
+      {
+        "regexp": "(?:git@|https://)gitlab.com[:/]([a-zA-Z0-9-_\\.]*)[/]([a-zA-Z0-9-_\\.]*)(.*)issues/([0-9]+)",
+        "organisation": 1,
+        "project": 2,
+        "issue": 4,
+        "type": "issue"
+      }
+    ],
+    "rebuild": "git@gitlab.com:$organisation/$project.git",
+    "replace": []
+  }
+]
