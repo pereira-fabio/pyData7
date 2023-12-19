@@ -20,6 +20,9 @@ with open(path_to_json, "r") as file:
 
 # Do not know how to call the function
 def foo():
+    print("Import Data")
+    import_data()
+
     print(range(len(data) - 1))
     for i in range(len(data) - 1):
         print(i)
@@ -106,4 +109,3 @@ def commit_handler(path_repo, repo_url, commit_sha):
 
 if __name__ == "__main__":
     foo()
-    import_data()
