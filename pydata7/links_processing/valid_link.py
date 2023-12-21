@@ -21,6 +21,22 @@ test = []
 
 def has_commit():
     for item in data:
+        # Does not work for gitlab links yet
+        # Check if the url is a gitlab link
+        # if is_gitlab(item["url"]):
+        #     if "commit" in item["url"]:
+        #         commit_sha = item["url"].split("commit/")[-1]
+        #         parts = item["url"].split("/")
+        #         repository = "https://" + parts[2] + "/" + parts[3] + "/" + parts[4]
+        #         # Add the organization and project name to the dictionary
+        #         item["repository"] = repository
+        #         item["commit_sha"] = commit_sha
+        #         # Add the dictionary to the list
+        #         contains_commit.append(item)
+        #     elif "issues" in item["url"]:
+        #         # Add the dictionary to the list
+        #         contains_issues.append(item)
+
         if "commit" in item["url"]:
             # Get the organization and project name from the url
             # For GitHub links only
@@ -55,6 +71,11 @@ def has_commit():
 def is_alphanumeric(commit_sha):
     regex_pattern = r"^[a-zA-Z0-9]+$"
     return re.match(regex_pattern, commit_sha) is not None
+
+
+def is_gitlab(url):
+    regex_pattern = "pydata7/regex/gitlab_regex.json"
+    return re.match(regex_pattern, url) is not None
 
 
 def sorted_data():
