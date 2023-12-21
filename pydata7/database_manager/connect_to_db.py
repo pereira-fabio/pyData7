@@ -11,6 +11,7 @@ port = os.getenv("PORT")
 user = os.getenv("USER_MONGO")
 password = os.getenv("PASSWORD_MONGO")
 client = MongoClient(hostname, port, username=user, password=password)
+# For Windows
 # client = MongoClient("mongodb://localhost:27017/")
 mydb = client["pydata7"]  # database name
 

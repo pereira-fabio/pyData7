@@ -7,9 +7,12 @@ from pydata7.scripts.json_file_generation import json_file_generation
 # path_to_platform = "../regex/platform.json"
 # Only for the github links
 path_to_platform = "pydata7/regex/github_regex.json"
+# path_to_platform = "pydata7/regex/gitlab_regex.json"
 
 # Path to the data from the data_generator
 path_to_json = data_retrieval()
+# For testing
+# path_to_json = "pydata7/data/json_files/raw_data_2023-11-14_16-55-39.json"
 
 # Load the regex patterns from platform.json (regex)
 with open(path_to_platform, "r") as regex_file:
