@@ -4,10 +4,10 @@ from pydata7.links_processing.link_filter import data_filtering
 from pydata7.scripts.json_file_generation import json_file_generation
 
 # Path to the data from the data_generator
-# path_to_json = data_filtering()
+path_to_json = data_filtering()
 
 # For testing purposes
-path_to_json = "../data/json_files/filtered_data_2023-11-14_16-55-56.json"
+# path_to_json = "pydata7/data/json_files/filtered_data_2023-11-14_16-55-56.json"
 
 # A list to store the data that contains a commit
 contains_commit = []
@@ -33,7 +33,6 @@ def has_commit():
                 item["commit_sha"] = commit_sha
                 # Add the dictionary to the list
                 contains_commit.append(item)
-                print(len(contains_commit))
             else:
                 part_sha = commit_sha.split("#diff-")
                 # Add the organization and project name to the dictionary
@@ -41,11 +40,12 @@ def has_commit():
                 item["commit_sha"] = part_sha[0]
                 # Add the dictionary to the list
                 contains_commit.append(item)
-                print(len(contains_commit))
 
         elif "issues" in item["url"]:
             # Add the dictionary to the list
             contains_issues.append(item)
+    print(len(contains_commit), "links contain a commit")
+    print(len(contains_issues), "links contain an issue")
     # This is generated if needed later
     json_file_generation(contains_issues, "contains_issues")
     # This is the main function that will be used
