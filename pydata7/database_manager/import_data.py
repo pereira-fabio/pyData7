@@ -4,6 +4,9 @@ import os
 path_to_data = "pydata7/data/json_files/"
 
 
+# For windows
+# path_to_data = "../data/json_files/"
+
 # Imports data into the database by going through the data folder
 # Since any data might be needed in the future, it makes sense to import all the data
 def import_data():
